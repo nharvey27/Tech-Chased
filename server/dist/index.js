@@ -23,6 +23,7 @@ const User_1 = require("./entities/User");
 const user_1 = require("./resolvers/user");
 const connect_redis_1 = __importDefault(require("connect-redis"));
 const ioredis_1 = __importDefault(require("ioredis"));
+const Project_1 = require("./entities/Project");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const RedisStore = connect_redis_1.default(express_session_1.default);
     const redis = new ioredis_1.default();
@@ -31,7 +32,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         database: "techchased",
         logging: true,
         synchronize: true,
-        entities: [User_1.User],
+        entities: [User_1.User, Project_1.Project],
     });
     const app = express_1.default();
     app.use(cors_1.default({

@@ -9,6 +9,7 @@ import { User } from "./entities/User";
 import { UserResolver } from "./resolvers/user";
 import connectRedis from "connect-redis";
 import Redis from "ioredis";
+import { Project } from "./entities/Project";
 
 declare module "express-session" {
   interface Session {
@@ -26,7 +27,7 @@ const main = async () => {
     database: "techchased",
     logging: true,
     synchronize: true,
-    entities: [User],
+    entities: [User, Project],
   });
 
   //create express session
