@@ -4,18 +4,17 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
   ManyToMany,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Ticket } from "./Ticket";
+import { Project } from "./Project";
 import { User } from "./User";
 
 @ObjectType()
 @Entity()
-export class Project extends BaseEntity {
+export class Ticket extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
@@ -28,16 +27,28 @@ export class Project extends BaseEntity {
   @Column()
   description!: string;
 
-  // project may have many users
-  @Field(() => [User])
-  @ManyToMany(() => User, (user) => user.projects)
-  @JoinTable()
-  users: User[];
+  @Field()
+  @Column()
+  status!: string;
 
-  //project may have multiple tickets
-  @Field(() => [Ticket])
-  @OneToMany(() => Ticket, (ticket) => ticket.project)
-  tickets: Ticket[];
+  @Field()
+  @Column()
+  priority!: string;
+
+  //column so a ticket knows what project it belongs to
+  @Field()
+  @Column()
+  projectId!: number;
+
+  //tickets belong to a single project
+  @Field(() => Project)
+  @ManyToOne(() => Project, (project) => project.tickets)
+  project: Project;
+
+  //ticket may have multiple users
+  @Field(() => [User])
+  @ManyToMany(() => User, (user) => user.tickets)
+  users: User[];
 
   @Field(() => String)
   @CreateDateColumn()

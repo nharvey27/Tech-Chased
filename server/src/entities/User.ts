@@ -4,11 +4,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Project } from "./Project";
+import { Ticket } from "./Ticket";
 
 @ObjectType()
 @Entity()
@@ -28,8 +30,16 @@ export class User extends BaseEntity {
   @Column()
   password!: string;
 
-  @ManyToMany(() => Project, (project) => project.users)
+  //users may have many projects
+  @Field(() => [Project], { nullable: true })
+  @ManyToMany(() => Project, (project) => project.users, { eager: true })
   projects: Project[];
+
+  //users may have multiple tickets
+  @Field(() => [Ticket], { nullable: true })
+  @ManyToMany(() => Ticket, (ticket) => ticket.users, { eager: true })
+  @JoinTable()
+  tickets: Ticket[];
 
   @Field(() => String)
   @CreateDateColumn()

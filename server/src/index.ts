@@ -10,6 +10,9 @@ import { UserResolver } from "./resolvers/user";
 import connectRedis from "connect-redis";
 import Redis from "ioredis";
 import { Project } from "./entities/Project";
+import { Ticket } from "./entities/Ticket";
+import { ProjectResolver } from "./resolvers/project";
+import { TicketResolver } from "./resolvers/ticket";
 
 declare module "express-session" {
   interface Session {
@@ -27,7 +30,7 @@ const main = async () => {
     database: "techchased",
     logging: true,
     synchronize: true,
-    entities: [User, Project],
+    entities: [User, Project, Ticket],
   });
 
   //create express session
@@ -59,7 +62,7 @@ const main = async () => {
   //create Apollo Server instance
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver],
+      resolvers: [UserResolver, ProjectResolver, TicketResolver],
       validate: false,
     }),
     context: ({ req, res }) => ({

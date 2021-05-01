@@ -24,6 +24,9 @@ const user_1 = require("./resolvers/user");
 const connect_redis_1 = __importDefault(require("connect-redis"));
 const ioredis_1 = __importDefault(require("ioredis"));
 const Project_1 = require("./entities/Project");
+const Ticket_1 = require("./entities/Ticket");
+const project_1 = require("./resolvers/project");
+const ticket_1 = require("./resolvers/ticket");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const RedisStore = connect_redis_1.default(express_session_1.default);
     const redis = new ioredis_1.default();
@@ -32,7 +35,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         database: "techchased",
         logging: true,
         synchronize: true,
-        entities: [User_1.User, Project_1.Project],
+        entities: [User_1.User, Project_1.Project, Ticket_1.Ticket],
     });
     const app = express_1.default();
     app.use(cors_1.default({
@@ -53,7 +56,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     }));
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: yield type_graphql_1.buildSchema({
-            resolvers: [user_1.UserResolver],
+            resolvers: [user_1.UserResolver, project_1.ProjectResolver, ticket_1.TicketResolver],
             validate: false,
         }),
         context: ({ req, res }) => ({

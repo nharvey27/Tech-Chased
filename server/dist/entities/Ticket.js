@@ -9,52 +9,66 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Project = void 0;
+exports.Ticket = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
-const Ticket_1 = require("./Ticket");
+const Project_1 = require("./Project");
 const User_1 = require("./User");
-let Project = class Project extends typeorm_1.BaseEntity {
+let Ticket = class Ticket extends typeorm_1.BaseEntity {
 };
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Project.prototype, "id", void 0);
+], Ticket.prototype, "id", void 0);
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Project.prototype, "title", void 0);
+], Ticket.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Project.prototype, "description", void 0);
+], Ticket.prototype, "description", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Ticket.prototype, "status", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Ticket.prototype, "priority", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typeorm_1.Column(),
+    __metadata("design:type", Number)
+], Ticket.prototype, "projectId", void 0);
+__decorate([
+    type_graphql_1.Field(() => Project_1.Project),
+    typeorm_1.ManyToOne(() => Project_1.Project, (project) => project.tickets),
+    __metadata("design:type", Project_1.Project)
+], Ticket.prototype, "project", void 0);
 __decorate([
     type_graphql_1.Field(() => [User_1.User]),
-    typeorm_1.ManyToMany(() => User_1.User, (user) => user.projects),
-    typeorm_1.JoinTable(),
+    typeorm_1.ManyToMany(() => User_1.User, (user) => user.tickets),
     __metadata("design:type", Array)
-], Project.prototype, "users", void 0);
-__decorate([
-    type_graphql_1.Field(() => [Ticket_1.Ticket]),
-    typeorm_1.OneToMany(() => Ticket_1.Ticket, (ticket) => ticket.project),
-    __metadata("design:type", Array)
-], Project.prototype, "tickets", void 0);
+], Ticket.prototype, "users", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
-], Project.prototype, "createdAt", void 0);
+], Ticket.prototype, "createdAt", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
     typeorm_1.UpdateDateColumn(),
     __metadata("design:type", Date)
-], Project.prototype, "updatedAt", void 0);
-Project = __decorate([
+], Ticket.prototype, "updatedAt", void 0);
+Ticket = __decorate([
     type_graphql_1.ObjectType(),
     typeorm_1.Entity()
-], Project);
-exports.Project = Project;
-//# sourceMappingURL=Project.js.map
+], Ticket);
+exports.Ticket = Ticket;
+//# sourceMappingURL=Ticket.js.map

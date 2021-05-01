@@ -13,6 +13,7 @@ exports.User = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const Project_1 = require("./Project");
+const Ticket_1 = require("./Ticket");
 let User = class User extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -35,9 +36,16 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => Project_1.Project, (project) => project.users),
+    type_graphql_1.Field(() => [Project_1.Project], { nullable: true }),
+    typeorm_1.ManyToMany(() => Project_1.Project, (project) => project.users, { eager: true }),
     __metadata("design:type", Array)
 ], User.prototype, "projects", void 0);
+__decorate([
+    type_graphql_1.Field(() => [Ticket_1.Ticket], { nullable: true }),
+    typeorm_1.ManyToMany(() => Ticket_1.Ticket, (ticket) => ticket.users, { eager: true }),
+    typeorm_1.JoinTable(),
+    __metadata("design:type", Array)
+], User.prototype, "tickets", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
     typeorm_1.CreateDateColumn(),

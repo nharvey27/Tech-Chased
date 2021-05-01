@@ -21,86 +21,70 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProjectResolver = void 0;
-const type_graphql_1 = require("type-graphql");
-const Project_1 = require("../entities/Project");
-const projectInputs_1 = require("./projectInputs");
-const isAuth_1 = require("../middleware/isAuth");
-const typeorm_1 = require("typeorm");
+exports.TicketResolver = void 0;
 const Ticket_1 = require("../entities/Ticket");
+const type_graphql_1 = require("type-graphql");
+const typeorm_1 = require("typeorm");
+const ticketInputs_1 = require("./ticketInputs");
+const Project_1 = require("../entities/Project");
 const User_1 = require("../entities/User");
-let ProjectResolver = class ProjectResolver {
-    users(project) {
+let TicketResolver = class TicketResolver extends typeorm_1.BaseEntity {
+    users(ticket) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield typeorm_1.getConnection()
                 .createQueryBuilder()
-                .relation(Project_1.Project, "users")
-                .of(project.id)
+                .relation(Ticket_1.Ticket, "users")
+                .of(ticket.id)
                 .loadMany();
             console.log(result);
             return result;
         });
     }
-    tickets(project) {
+    project(ticket) {
+        return Project_1.Project.findOne(ticket.projectId);
+    }
+    tickets() {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield Ticket_1.Ticket.find({ where: { projectId: project.id } });
-            return result;
+            return yield Ticket_1.Ticket.find();
         });
     }
-    projects() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return Project_1.Project.find({});
-        });
-    }
-    project(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const project = Project_1.Project.findOne(id);
-            if (!project) {
-                return undefined;
-            }
-            return project;
-        });
-    }
-    createProject(options, { req }) {
+    createTicket(options, projectId, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
             const userId = req.session.userId;
-            console.log(options);
-            const project = yield Project_1.Project.create(Object.assign({}, options)).save();
+            const ticket = yield Ticket_1.Ticket.create(Object.assign(Object.assign({}, options), { projectId })).save();
             yield typeorm_1.getConnection()
                 .createQueryBuilder()
-                .relation(Project_1.Project, "users")
-                .of(project)
+                .relation(Ticket_1.Ticket, "users")
+                .of(ticket)
                 .add(userId);
-            console.log(project);
-            return project;
+            return ticket;
         });
     }
-    deleteProject(id, { req }) {
+    deleteTicket(id, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
             const userId = req.session.userId;
-            const projectResult = yield Project_1.Project.delete({ id });
+            const ticketResult = yield Ticket_1.Ticket.delete({ id });
             yield typeorm_1.getConnection()
                 .createQueryBuilder()
-                .relation(Project_1.Project, "users")
+                .relation(Ticket_1.Ticket, "users")
                 .of(id)
                 .remove(userId);
-            if (!projectResult) {
+            console.log(ticketResult);
+            if (ticketResult.affected === 0) {
                 return false;
             }
             return true;
         });
     }
-    updateProject(id, options, { req }) {
+    updateTicket(id, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = req.session.userId;
             const result = yield typeorm_1.createQueryBuilder()
-                .update(Project_1.Project)
+                .update(Ticket_1.Ticket)
                 .set(Object.assign({}, options))
                 .where("id = :id ", { id })
                 .returning("*")
                 .execute();
-            console.log("result:", result.raw[0] || undefined);
-            return result.raw;
+            return result.raw[0];
         });
     }
 };
@@ -108,59 +92,51 @@ __decorate([
     type_graphql_1.FieldResolver(() => User_1.User),
     __param(0, type_graphql_1.Root()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Project_1.Project]),
+    __metadata("design:paramtypes", [Ticket_1.Ticket]),
     __metadata("design:returntype", Promise)
-], ProjectResolver.prototype, "users", null);
+], TicketResolver.prototype, "users", null);
 __decorate([
-    type_graphql_1.FieldResolver(() => Ticket_1.Ticket),
+    type_graphql_1.FieldResolver(() => Project_1.Project),
     __param(0, type_graphql_1.Root()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Project_1.Project]),
-    __metadata("design:returntype", Promise)
-], ProjectResolver.prototype, "tickets", null);
+    __metadata("design:paramtypes", [Ticket_1.Ticket]),
+    __metadata("design:returntype", void 0)
+], TicketResolver.prototype, "project", null);
 __decorate([
-    type_graphql_1.Query(() => [Project_1.Project]),
+    type_graphql_1.Query(() => [Ticket_1.Ticket]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], ProjectResolver.prototype, "projects", null);
+], TicketResolver.prototype, "tickets", null);
 __decorate([
-    type_graphql_1.Query(() => Project_1.Project || null),
-    __param(0, type_graphql_1.Arg("id")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Promise)
-], ProjectResolver.prototype, "project", null);
-__decorate([
-    type_graphql_1.UseMiddleware(isAuth_1.isAuth),
-    type_graphql_1.Mutation(() => Project_1.Project),
+    type_graphql_1.Mutation(() => Ticket_1.Ticket, { nullable: true }),
     __param(0, type_graphql_1.Arg("options")),
-    __param(1, type_graphql_1.Ctx()),
+    __param(1, type_graphql_1.Arg("projectId", () => type_graphql_1.Int)),
+    __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [projectInputs_1.ProjectInput, Object]),
+    __metadata("design:paramtypes", [ticketInputs_1.TicketInput, Number, Object]),
     __metadata("design:returntype", Promise)
-], ProjectResolver.prototype, "createProject", null);
+], TicketResolver.prototype, "createTicket", null);
 __decorate([
-    type_graphql_1.UseMiddleware(isAuth_1.isAuth),
     type_graphql_1.Mutation(() => Boolean),
     __param(0, type_graphql_1.Arg("id", () => type_graphql_1.Int)),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
-], ProjectResolver.prototype, "deleteProject", null);
+], TicketResolver.prototype, "deleteTicket", null);
 __decorate([
-    type_graphql_1.UseMiddleware(isAuth_1.isAuth),
-    type_graphql_1.Mutation(() => Project_1.Project),
+    type_graphql_1.Mutation(() => Ticket_1.Ticket),
     __param(0, type_graphql_1.Arg("id", () => type_graphql_1.Int)),
     __param(1, type_graphql_1.Arg("options")),
-    __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, projectInputs_1.ProjectInput, Object]),
+    __metadata("design:paramtypes", [Number, ticketInputs_1.TicketInput]),
     __metadata("design:returntype", Promise)
-], ProjectResolver.prototype, "updateProject", null);
-ProjectResolver = __decorate([
-    type_graphql_1.Resolver(Project_1.Project)
-], ProjectResolver);
-exports.ProjectResolver = ProjectResolver;
-//# sourceMappingURL=project.js.map
+], TicketResolver.prototype, "updateTicket", null);
+TicketResolver = __decorate([
+    type_graphql_1.ObjectType(),
+    typeorm_1.Entity(),
+    type_graphql_1.Resolver(Ticket_1.Ticket)
+], TicketResolver);
+exports.TicketResolver = TicketResolver;
+//# sourceMappingURL=ticket.js.map
