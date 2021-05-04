@@ -1,0 +1,14 @@
+query Projects {
+  projects {
+    description
+    id
+    tickets {
+      id
+      projectId
+    }
+    users {
+      id
+      username
+    }
+  }
+}

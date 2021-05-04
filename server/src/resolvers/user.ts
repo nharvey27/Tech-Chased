@@ -33,7 +33,7 @@ class UserResponse {
 
 @Resolver(User)
 export class UserResolver {
-  @Query(() => User)
+  @Query(() => User, { nullable: true })
   async me(@Ctx() { req }: MyContext) {
     //check if theres a cookie in the brower
     if (!req.session.userId) {

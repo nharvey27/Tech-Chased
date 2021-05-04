@@ -1,0 +1,16 @@
+fragment RegularUser on User {
+  id
+  username
+  tickets {
+    id
+    title
+    description
+    status
+    priority
+  }
+  projects {
+    id
+    title
+    description
+  }
+}

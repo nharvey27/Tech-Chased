@@ -1,0 +1,18 @@
+query Me {
+  me {
+    id
+    username
+    tickets {
+      id
+      title
+      description
+      status
+      priority
+    }
+    projects {
+      id
+      title
+      description
+    }
+  }
+}
