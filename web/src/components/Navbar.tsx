@@ -14,14 +14,18 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import NextLink from "next/link";
-import { useMeQuery } from "../generated/graphql";
+import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 import { Sidebar } from "./Sidebar";
 import capitalize from "../utils/capitalize";
+import { useApolloClient } from "@apollo/client";
 
 interface NavbarProps {}
 
 export const NavBar: React.FC<NavbarProps> = ({}) => {
+  const apolloClient = useApolloClient();
+
   const { data } = useMeQuery();
+  const [logout, { loading: logoutFetching }] = useLogoutMutation();
   // const [iOpen, updateIsOpen] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -49,6 +53,15 @@ export const NavBar: React.FC<NavbarProps> = ({}) => {
           </NextLink>
           <Button colorScheme="" onClick={onOpen}>
             Profile
+          </Button>
+          <Button
+            onClick={async () => {
+              await logout();
+              await apolloClient.resetStore();
+            }}
+            isLoading={logoutFetching}
+          >
+            Logout
           </Button>
         </Flex>
       </>
