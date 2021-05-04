@@ -45,9 +45,7 @@ export const NavBar: React.FC<NavbarProps> = ({}) => {
         <Flex align="center">
           <Box mr={2}>{capitalize(data.me.username)}</Box>
           <NextLink href="/create-project">
-            <Button as={Link} mr={4}>
-              Create Project
-            </Button>
+            <Button as={Link}>Create Project</Button>
           </NextLink>
           <Button colorScheme="" onClick={onOpen}>
             Profile
@@ -71,7 +69,7 @@ export const NavBar: React.FC<NavbarProps> = ({}) => {
     <>
       {sidebar}
       <Flex>
-        <Box>
+        <Box mr={2} mt={2} ml={2}>
           <Heading as="h2" size="lg">
             Tech Chased
           </Heading>

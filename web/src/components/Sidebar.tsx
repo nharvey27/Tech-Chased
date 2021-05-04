@@ -49,9 +49,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </h2>
               <AccordionPanel pb={4}>
                 {me.projects?.map((project) => {
-                  {
-                    project.title;
-                  }
+                  <Heading>{project.title} </Heading>;
                 })}
               </AccordionPanel>
             </AccordionItem>
@@ -68,9 +66,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </h2>
               <AccordionPanel pb={4}>
                 {me.tickets?.map((ticket) => {
-                  {
-                    ticket.title;
-                  }
+                  <Heading>{ticket.title} </Heading>;
                 })}
               </AccordionPanel>
             </AccordionItem>
