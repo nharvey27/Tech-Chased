@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import { RegularUserFragment } from "../generated/graphql";
+import { MeQuery, RegularUserFragment } from "../generated/graphql";
 import capitalize from "../utils/capitalize";
 
 interface SidebarProps {
@@ -37,7 +37,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <DrawerHeader borderBottomWidth="1px">Profile</DrawerHeader>
         <DrawerBody>
           <Heading>{capitalize(me.username)}</Heading>
-          <Accordion allowMultiple>
+          {me.projects?.map((project) => {
+            console.log(project);
+            <p>{project.title}</p>;
+          })}
+          {/* <Accordion allowMultiple>
             <AccordionItem>
               <h2>
                 <AccordionButton>
@@ -70,7 +74,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 })}
               </AccordionPanel>
             </AccordionItem>
-          </Accordion>
+          </Accordion> */}
         </DrawerBody>
       </DrawerContent>
     </Drawer>

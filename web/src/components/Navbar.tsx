@@ -21,7 +21,7 @@ import capitalize from "../utils/capitalize";
 interface NavbarProps {}
 
 export const NavBar: React.FC<NavbarProps> = ({}) => {
-  const { data, loading } = useMeQuery();
+  const { data } = useMeQuery();
   // const [iOpen, updateIsOpen] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 

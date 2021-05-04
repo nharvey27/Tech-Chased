@@ -32,9 +32,8 @@ const Index: React.FC = ({}) => {
         <div>loading</div>
       ) : (
         <Container>
-          <Heading> Your Projects</Heading>
-          <Divider orientation="horizontal" />
-          <Grid templateColumns={"25% 50% 25%"}>
+          <Heading mb={6}> Your Projects</Heading>
+          <Grid templateColumns={"25% 50% 25%"} rowGap={2}>
             <Heading size={"md"}>Title</Heading>
             <Heading size={"md"}>Description</Heading>
             <Heading size={"md"}>Misc.</Heading>
@@ -42,9 +41,18 @@ const Index: React.FC = ({}) => {
             {data?.me?.projects?.map((p) =>
               !p ? null : (
                 <>
-                  <GridItem>{p.title}</GridItem>
-                  <GridItem>{p.description}</GridItem>
-                  <GridItem>{p.description}</GridItem>
+                  <Box h={"20px"}>
+                    <Divider orientation="horizontal" />
+                    <GridItem>{p.title}</GridItem>
+                  </Box>
+                  <Box h={"20px"}>
+                    <Divider orientation="horizontal" />
+                    <GridItem>{p.description}</GridItem>
+                  </Box>
+                  <Box h={"20px"}>
+                    <Divider orientation="horizontal" />
+                    <GridItem>{p.description}</GridItem>
+                  </Box>
                 </>
               )
             )}
