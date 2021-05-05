@@ -1,4 +1,12 @@
-import { Box, Grid, GridItem, Heading, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Grid,
+  GridItem,
+  Heading,
+  Link,
+  Stack,
+} from "@chakra-ui/react";
 import React from "react";
 import { Layout } from "../../components/Layout";
 import { useGetProjectFromUrl } from "../../utils/useGetProjectFromUrl";
@@ -31,32 +39,42 @@ const Project = ({}) => {
   return (
     <>
       <Layout>
-        <Heading mb={6}>Details for project {data.project.id}</Heading>
-        <Box>
+        <Stack ml={4} mb={10} mt={-2} bg="yellow.400">
+          <Heading as="h3" ml={2} size="lg" mb={3} mt={3}>
+            Details for project {data.project.id}
+          </Heading>
+        </Stack>
+        <Box ml={4}>
           <Grid
             templateColumns={"repeat(6, 1fr)"}
             templateRows={"repeat(2, 1fr)"}
           >
             <GridItem colSpan={3} bg="">
-              <Heading mb={2} size={"xs"}>
+              <Heading mb={2} as="h5" size={"xs"}>
                 Project Name
               </Heading>
-              <Heading size={"md"} ml={2}>
+              <Heading mb={4} size={"sm"} as="h6" ml={2}>
                 {data.project.title}
               </Heading>
+              <Divider orientation="horizontal" />
             </GridItem>
+
             <GridItem colSpan={3} bg="">
-              <Heading mb={2} size={"xs"}>
+              <Heading mb={2} as="h5" size={"xs"}>
                 Project Description
               </Heading>
-              <Heading size={"md"} ml={2}>
+              <Heading mb={4} size={"sm"} as="h6" ml={2}>
                 {data.project.description}
               </Heading>
+              <Divider orientation="horizontal" />
             </GridItem>
+
             <GridItem colSpan={2}>
-              <Heading size={"md"}>Assigned Personnel</Heading>
-              <Heading size={"xs"} ml={2}>
-                Current useres on this Project
+              <Heading as="h5" size={"sm"}>
+                Assigned Personnel
+              </Heading>
+              <Heading as={"h6"} size={"xs"} ml={2} mb={4}>
+                Current users on this Project
               </Heading>
               <Box>
                 <Grid templateColumns={"repeat(4,1fr)"}>
@@ -73,9 +91,12 @@ const Project = ({}) => {
                 </Grid>
               </Box>
             </GridItem>
+
             <GridItem colSpan={4}>
-              <Heading size={"md"}>Tickets for this project</Heading>
-              <Heading size={"xs"} ml={2}>
+              <Heading as="h5" size={"sm"}>
+                Tickets for this project
+              </Heading>
+              <Heading as="h6" size={"xs"} ml={2} mb={4}>
                 Ticket details
               </Heading>
               <Box>
@@ -88,14 +109,14 @@ const Project = ({}) => {
                   {data.project.tickets.map((ticket) =>
                     !ticket ? null : (
                       <>
-                        <NextLink
-                          href="/tickets/[id]"
-                          as={`/tickets/${ticket.id}`}
-                        >
-                          <Link>
-                            <GridItem colSpan={2}>{ticket.title}</GridItem>
-                          </Link>
-                        </NextLink>
+                        <GridItem colSpan={2}>
+                          <NextLink
+                            href="/tickets/[id]"
+                            as={`/tickets/${ticket.id}`}
+                          >
+                            <Link>{ticket.title}</Link>
+                          </NextLink>
+                        </GridItem>
                         <GridItem colSpan={2}>{ticket.status}</GridItem>
                         <GridItem colSpan={2}>{ticket.priority}</GridItem>
                         <GridItem colSpan={2}>

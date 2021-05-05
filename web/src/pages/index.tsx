@@ -1,4 +1,12 @@
-import { Box, Divider, Grid, GridItem, Heading, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Grid,
+  GridItem,
+  Heading,
+  Link,
+  Stack,
+} from "@chakra-ui/react";
 import { Container } from "next/app";
 import React from "react";
 import { Layout } from "../components/Layout";
@@ -24,8 +32,13 @@ const Index: React.FC = ({}) => {
         <div>loading</div>
       ) : (
         <Container>
-          <Heading mb={6}> Your Projects</Heading>
-          <Grid templateColumns={"25% 50% 25%"} rowGap={2}>
+          <Stack ml={4} mb={10} mt={-2} bg="yellow.400">
+            <Heading as="h3" ml={2} size="lg" mb={3} mt={3}>
+              Your Projects
+            </Heading>
+          </Stack>
+          <Divider orientation="horizontal" />
+          <Grid ml={4} templateColumns={"25% 50% 25%"} rowGap={2}>
             <Heading size={"md"}>Title</Heading>
             <Heading size={"md"}>Description</Heading>
             <Heading size={"md"}>Misc.</Heading>
@@ -33,21 +46,30 @@ const Index: React.FC = ({}) => {
             {data?.me?.projects?.map((p) =>
               !p ? null : (
                 <>
-                  <Box h={"20px"}>
+                  <Box h={"100%"}>
                     <Divider orientation="horizontal" />
                     <NextLink href="/projects/[id]" as={`/projects/${p.id}`}>
                       <Link>
-                        <GridItem>{p.title}</GridItem>
+                        <GridItem mb={5} mt={5}>
+                          {p.title}
+                        </GridItem>
                       </Link>
                     </NextLink>
-                  </Box>
-                  <Box h={"20px"}>
                     <Divider orientation="horizontal" />
-                    <GridItem>{p.description}</GridItem>
                   </Box>
-                  <Box h={"20px"}>
+                  <Box h={"100%"}>
                     <Divider orientation="horizontal" />
-                    <GridItem>{p.description}</GridItem>
+                    <GridItem mb={5} mt={5}>
+                      {p.description}
+                    </GridItem>
+                    <Divider orientation="horizontal" />
+                  </Box>
+                  <Box h={"100%"}>
+                    <Divider orientation="horizontal" />
+                    <GridItem mb={5} mt={5}>
+                      {p.description}
+                    </GridItem>
+                    <Divider orientation="horizontal" />
                   </Box>
                 </>
               )
