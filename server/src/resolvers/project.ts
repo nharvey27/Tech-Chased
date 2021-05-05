@@ -63,7 +63,6 @@ export class ProjectResolver {
     const userId = req.session.userId;
 
     //create project and save into db
-    console.log(options);
     const project = await Project.create({
       ...options,
     }).save();

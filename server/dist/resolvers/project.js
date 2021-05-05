@@ -64,7 +64,6 @@ let ProjectResolver = class ProjectResolver {
     createProject(options, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
             const userId = req.session.userId;
-            console.log(options);
             const project = yield Project_1.Project.create(Object.assign({}, options)).save();
             yield typeorm_1.getConnection()
                 .createQueryBuilder()

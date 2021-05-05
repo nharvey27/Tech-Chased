@@ -7,4 +7,10 @@ export class ProjectInput {
 
   @Field()
   description!: string;
+
+  @Field()
+  status!: string;
+
+  @Field()
+  priority!: string;
 }
