@@ -82,8 +82,8 @@ export const NavBar: React.FC<NavbarProps> = ({}) => {
     <>
       {sidebar}
       <Flex>
-        <Box mr={2} mt={2} ml={2}>
-          <Heading as="h2" size="lg">
+        <Box mr={2} mt={2} ml={8}>
+          <Heading as="h2" size="md">
             <NextLink href="/" as="/">
               <Link> Tech Chased</Link>
             </NextLink>

@@ -55,21 +55,18 @@ const Index: React.FC = ({}) => {
                         </GridItem>
                       </Link>
                     </NextLink>
-                    <Divider orientation="horizontal" />
                   </Box>
                   <Box h={"100%"}>
                     <Divider orientation="horizontal" />
                     <GridItem mb={5} mt={5}>
                       {p.description}
                     </GridItem>
-                    <Divider orientation="horizontal" />
                   </Box>
                   <Box h={"100%"}>
                     <Divider orientation="horizontal" />
                     <GridItem mb={5} mt={5}>
                       {p.description}
                     </GridItem>
-                    <Divider orientation="horizontal" />
                   </Box>
                 </>
               )
