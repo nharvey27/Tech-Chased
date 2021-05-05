@@ -41,7 +41,7 @@ const Project = ({}) => {
       <Layout>
         <Stack ml={4} mb={10} mt={-2} bg="yellow.400">
           <Heading as="h3" ml={2} size="lg" mb={3} mt={3}>
-            Details for project {data.project.id}
+            Details for Project #{data.project.id}
           </Heading>
         </Stack>
         <Box ml={4}>

@@ -34,32 +34,34 @@ const CreateProject: React.FC = ({}) => {
         }}
       >
         {({ isSubmitting }) => (
-          <Form>
-            <InputField name="title" placeholder="title" label="Title" />
-            <Box mt={4}>
-              <InputField
-                textarea
-                name="description"
-                placeholder="description"
-                label="description"
-              />
-            </Box>
-            <Box mt={4}>
-              <InputField
-                name="priority"
-                placeholder="priority"
-                label="Priority"
-              />
-            </Box>
-            <Box mt={4}>
-              <InputField name="status" placeholder="status" label="Status" />
-            </Box>
-            <Flex justifyContent="center">
-              <Button mt={4} type="submit" isLoading={isSubmitting} bg="teal">
-                Create Project
-              </Button>
-            </Flex>
-          </Form>
+          <Box p={4}>
+            <Form>
+              <InputField name="title" placeholder="Title" label="Title" />
+              <Box mt={4}>
+                <InputField
+                  textarea
+                  name="description"
+                  placeholder="Description"
+                  label="Description"
+                />
+              </Box>
+              <Box mt={4}>
+                <InputField
+                  name="priority"
+                  placeholder="Priority"
+                  label="Priority"
+                />
+              </Box>
+              <Box mt={4}>
+                <InputField name="status" placeholder="Status" label="Status" />
+              </Box>
+              <Flex justifyContent="center">
+                <Button mt={4} type="submit" isLoading={isSubmitting} bg="teal">
+                  Create Project
+                </Button>
+              </Flex>
+            </Form>
+          </Box>
         )}
       </Formik>
     </Layout>
