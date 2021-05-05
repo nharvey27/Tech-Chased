@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
@@ -54,9 +54,11 @@ const CreateProject: React.FC = ({}) => {
             <Box mt={4}>
               <InputField name="status" placeholder="status" label="Status" />
             </Box>
-            <Button mt={4} type="submit" isLoading={isSubmitting} bg="teal">
-              Create Project
-            </Button>
+            <Flex justifyContent="center">
+              <Button mt={4} type="submit" isLoading={isSubmitting} bg="teal">
+                Create Project
+              </Button>
+            </Flex>
           </Form>
         )}
       </Formik>
