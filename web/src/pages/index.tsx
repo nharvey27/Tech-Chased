@@ -1,21 +1,13 @@
-import {
-  Box,
-  Divider,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  Stack,
-} from "@chakra-ui/react";
+import { Box, Divider, Grid, GridItem, Heading, Link } from "@chakra-ui/react";
 import { Container } from "next/app";
 import React from "react";
 import { Layout } from "../components/Layout";
-import { useMeQuery, useProjectsQuery } from "../generated/graphql";
-
+import { useMeQuery } from "../generated/graphql";
+import NextLink from "next/link";
 import { withApollo } from "../utils/withApollo";
 
 const Index: React.FC = ({}) => {
-  const { data, error, loading, fetchMore, variables } = useMeQuery();
+  const { data, error, loading } = useMeQuery();
 
   if (!loading && !data) {
     return (
@@ -43,7 +35,11 @@ const Index: React.FC = ({}) => {
                 <>
                   <Box h={"20px"}>
                     <Divider orientation="horizontal" />
-                    <GridItem>{p.title}</GridItem>
+                    <NextLink href="/projects/[id]" as={`/projects/${p.id}`}>
+                      <Link>
+                        <GridItem>{p.title}</GridItem>
+                      </Link>
+                    </NextLink>
                   </Box>
                   <Box h={"20px"}>
                     <Divider orientation="horizontal" />

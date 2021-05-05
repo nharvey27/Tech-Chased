@@ -98,12 +98,18 @@ export type Query = {
   me?: Maybe<User>;
   projects: Array<Project>;
   project: Project;
+  ticket: Ticket;
   tickets: Array<Ticket>;
 };
 
 
 export type QueryProjectArgs = {
-  id: Scalars['Float'];
+  id: Scalars['Int'];
+};
+
+
+export type QueryTicketArgs = {
+  id: Scalars['Int'];
 };
 
 export type Ticket = {
@@ -231,6 +237,30 @@ export type MeQuery = (
   )> }
 );
 
+export type ProjectQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type ProjectQuery = (
+  { __typename?: 'Query' }
+  & { project: (
+    { __typename?: 'Project' }
+    & Pick<Project, 'title' | 'id' | 'description'>
+    & { tickets: Array<(
+      { __typename?: 'Ticket' }
+      & Pick<Ticket, 'id' | 'priority' | 'title' | 'status' | 'description'>
+      & { users: Array<(
+        { __typename?: 'User' }
+        & Pick<User, 'username'>
+      )> }
+    )>, users: Array<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'email'>
+    )> }
+  ) }
+);
+
 export type ProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -247,6 +277,26 @@ export type ProjectsQuery = (
       & Pick<User, 'id' | 'username'>
     )> }
   )> }
+);
+
+export type TicketQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type TicketQuery = (
+  { __typename?: 'Query' }
+  & { ticket: (
+    { __typename?: 'Ticket' }
+    & Pick<Ticket, 'id' | 'title' | 'status' | 'description' | 'priority' | 'createdAt' | 'updatedAt'>
+    & { project: (
+      { __typename?: 'Project' }
+      & Pick<Project, 'title'>
+    ), users: Array<(
+      { __typename?: 'User' }
+      & Pick<User, 'username'>
+    )> }
+  ) }
 );
 
 export const RegularErrorFragmentDoc = gql`
@@ -428,6 +478,58 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const ProjectDocument = gql`
+    query Project($id: Int!) {
+  project(id: $id) {
+    title
+    id
+    description
+    tickets {
+      id
+      priority
+      title
+      status
+      description
+      users {
+        username
+      }
+    }
+    users {
+      id
+      username
+      email
+    }
+  }
+}
+    `;
+
+/**
+ * __useProjectQuery__
+ *
+ * To run a query within a React component, call `useProjectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProjectQuery(baseOptions: Apollo.QueryHookOptions<ProjectQuery, ProjectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, options);
+      }
+export function useProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectQuery, ProjectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, options);
+        }
+export type ProjectQueryHookResult = ReturnType<typeof useProjectQuery>;
+export type ProjectLazyQueryHookResult = ReturnType<typeof useProjectLazyQuery>;
+export type ProjectQueryResult = Apollo.QueryResult<ProjectQuery, ProjectQueryVariables>;
 export const ProjectsDocument = gql`
     query Projects {
   projects {
@@ -471,3 +573,50 @@ export function useProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<P
 export type ProjectsQueryHookResult = ReturnType<typeof useProjectsQuery>;
 export type ProjectsLazyQueryHookResult = ReturnType<typeof useProjectsLazyQuery>;
 export type ProjectsQueryResult = Apollo.QueryResult<ProjectsQuery, ProjectsQueryVariables>;
+export const TicketDocument = gql`
+    query Ticket($id: Int!) {
+  ticket(id: $id) {
+    id
+    title
+    status
+    description
+    priority
+    createdAt
+    updatedAt
+    project {
+      title
+    }
+    users {
+      username
+    }
+  }
+}
+    `;
+
+/**
+ * __useTicketQuery__
+ *
+ * To run a query within a React component, call `useTicketQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTicketQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTicketQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useTicketQuery(baseOptions: Apollo.QueryHookOptions<TicketQuery, TicketQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TicketQuery, TicketQueryVariables>(TicketDocument, options);
+      }
+export function useTicketLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TicketQuery, TicketQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TicketQuery, TicketQueryVariables>(TicketDocument, options);
+        }
+export type TicketQueryHookResult = ReturnType<typeof useTicketQuery>;
+export type TicketLazyQueryHookResult = ReturnType<typeof useTicketLazyQuery>;
+export type TicketQueryResult = Apollo.QueryResult<TicketQuery, TicketQueryVariables>;

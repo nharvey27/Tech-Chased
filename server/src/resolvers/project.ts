@@ -43,7 +43,9 @@ export class ProjectResolver {
   }
 
   @Query(() => Project || null)
-  async project(@Arg("id") id: number): Promise<Project | undefined> {
+  async project(
+    @Arg("id", () => Int) id: number
+  ): Promise<Project | undefined> {
     const project = Project.findOne(id);
     if (!project) {
       return undefined;

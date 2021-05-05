@@ -38,7 +38,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <DrawerBody>
           <Heading>{capitalize(me.username)}</Heading>
           {me.projects?.map((project) => {
-            console.log(project);
             <p>{project.title}</p>;
           })}
           {/* <Accordion allowMultiple>

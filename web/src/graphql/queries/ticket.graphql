@@ -1,0 +1,17 @@
+query Ticket($id: Int!) {
+  ticket(id: $id) {
+    id
+    title
+    status
+    description
+    priority
+    createdAt
+    updatedAt
+    project {
+      title
+    }
+    users {
+      username
+    }
+  }
+}

@@ -43,6 +43,15 @@ let TicketResolver = class TicketResolver extends typeorm_1.BaseEntity {
     project(ticket) {
         return Project_1.Project.findOne(ticket.projectId);
     }
+    ticket(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ticket = yield Ticket_1.Ticket.findOne(id);
+            if (!ticket) {
+                return undefined;
+            }
+            return ticket;
+        });
+    }
     tickets() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield Ticket_1.Ticket.find();
@@ -102,6 +111,13 @@ __decorate([
     __metadata("design:paramtypes", [Ticket_1.Ticket]),
     __metadata("design:returntype", void 0)
 ], TicketResolver.prototype, "project", null);
+__decorate([
+    type_graphql_1.Query(() => Ticket_1.Ticket),
+    __param(0, type_graphql_1.Arg("id", () => type_graphql_1.Int)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], TicketResolver.prototype, "ticket", null);
 __decorate([
     type_graphql_1.Query(() => [Ticket_1.Ticket]),
     __metadata("design:type", Function),

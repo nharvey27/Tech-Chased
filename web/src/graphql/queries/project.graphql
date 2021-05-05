@@ -1,0 +1,22 @@
+query Project($id: Int!) {
+  project(id: $id) {
+    title
+    id
+    description
+    tickets {
+      id
+      priority
+      title
+      status
+      description
+      users {
+        username
+      }
+    }
+    users {
+      id
+      username
+      email
+    }
+  }
+}

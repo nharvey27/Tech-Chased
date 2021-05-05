@@ -37,6 +37,16 @@ export class TicketResolver extends BaseEntity {
     return Project.findOne(ticket.projectId);
   }
 
+  @Query(() => Ticket)
+  async ticket(@Arg("id", () => Int!) id: number): Promise<Ticket | undefined> {
+    const ticket = await Ticket.findOne(id);
+
+    if (!ticket) {
+      return undefined;
+    }
+    return ticket;
+  }
+
   @Query(() => [Ticket])
   async tickets(): Promise<Ticket[]> {
     return await Ticket.find();
