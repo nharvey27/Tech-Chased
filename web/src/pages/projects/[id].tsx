@@ -1,9 +1,11 @@
 import {
   Box,
   Divider,
+  Flex,
   Grid,
   GridItem,
   Heading,
+  IconButton,
   Link,
   Stack,
 } from "@chakra-ui/react";
@@ -12,11 +14,14 @@ import { Layout } from "../../components/Layout";
 import { useGetProjectFromUrl } from "../../utils/useGetProjectFromUrl";
 import { withApollo } from "../../utils/withApollo";
 import NextLink from "next/link";
+import { useDeleteProjectMutation } from "../../generated/graphql";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 interface ProjcetProps {}
 
 const Project = ({}) => {
   const { data, error, loading } = useGetProjectFromUrl();
+  const [deleteProject] = useDeleteProjectMutation();
   if (loading) {
     return (
       <Layout>
@@ -43,6 +48,28 @@ const Project = ({}) => {
           <Heading as="h3" ml={2} size="lg" mb={3} mt={3}>
             Details for Project #{data.project.id}
           </Heading>
+          <Flex alignItems="center">
+            <NextLink href={`/projects/edit/${data.project.id}`} replace>
+              <Link>
+                <Heading as="h4" size="xs/">
+                  Edit |
+                </Heading>
+              </Link>
+            </NextLink>
+            <IconButton
+              icon={<DeleteIcon />}
+              aria-label="Delete Post"
+              onClick={() => {
+                deleteProject({
+                  variables: { id: data.project.id },
+                  update: (cache) => {
+                    // Post:77
+                    cache.evict({ id: "Project:" + data.project.id });
+                  },
+                });
+              }}
+            />
+          </Flex>
         </Stack>
         <Box ml={4}>
           <Grid

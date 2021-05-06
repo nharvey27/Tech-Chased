@@ -86,14 +86,15 @@ export class ProjectResolver {
   ): Promise<Boolean> {
     const userId = req.session.userId;
 
-    const projectResult = await Project.delete({ id });
-
     await getConnection()
       .createQueryBuilder()
       .relation(Project, "users")
       .of(id)
       .remove(userId);
 
+    await Ticket.delete({ projectId: id });
+
+    const projectResult = await Project.delete({ id });
     //check if project was deleted
     if (!projectResult) {
       return false;
@@ -118,6 +119,6 @@ export class ProjectResolver {
       .execute();
 
     console.log("result:", result.raw[0] || undefined);
-    return result.raw;
+    return result.raw[0];
   }
 }

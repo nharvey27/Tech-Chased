@@ -21,14 +21,6 @@ __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
 ], ProjectInput.prototype, "description", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], ProjectInput.prototype, "status", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], ProjectInput.prototype, "priority", void 0);
 ProjectInput = __decorate([
     type_graphql_1.InputType()
 ], ProjectInput);

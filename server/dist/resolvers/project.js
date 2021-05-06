@@ -77,12 +77,13 @@ let ProjectResolver = class ProjectResolver {
     deleteProject(id, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
             const userId = req.session.userId;
-            const projectResult = yield Project_1.Project.delete({ id });
             yield typeorm_1.getConnection()
                 .createQueryBuilder()
                 .relation(Project_1.Project, "users")
                 .of(id)
                 .remove(userId);
+            yield Ticket_1.Ticket.delete({ projectId: id });
+            const projectResult = yield Project_1.Project.delete({ id });
             if (!projectResult) {
                 return false;
             }
@@ -99,7 +100,7 @@ let ProjectResolver = class ProjectResolver {
                 .returning("*")
                 .execute();
             console.log("result:", result.raw[0] || undefined);
-            return result.raw;
+            return result.raw[0];
         });
     }
 };
