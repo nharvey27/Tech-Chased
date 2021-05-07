@@ -197,6 +197,20 @@ export type CreateProjectMutation = (
   ) }
 );
 
+export type CreateTicketMutationVariables = Exact<{
+  options: TicketInput;
+  projectId: Scalars['Int'];
+}>;
+
+
+export type CreateTicketMutation = (
+  { __typename?: 'Mutation' }
+  & { createTicket?: Maybe<(
+    { __typename?: 'Ticket' }
+    & Pick<Ticket, 'id'>
+  )> }
+);
+
 export type DeleteProjectMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
@@ -404,6 +418,40 @@ export function useCreateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateProjectMutationHookResult = ReturnType<typeof useCreateProjectMutation>;
 export type CreateProjectMutationResult = Apollo.MutationResult<CreateProjectMutation>;
 export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<CreateProjectMutation, CreateProjectMutationVariables>;
+export const CreateTicketDocument = gql`
+    mutation CreateTicket($options: TicketInput!, $projectId: Int!) {
+  createTicket(options: $options, projectId: $projectId) {
+    id
+  }
+}
+    `;
+export type CreateTicketMutationFn = Apollo.MutationFunction<CreateTicketMutation, CreateTicketMutationVariables>;
+
+/**
+ * __useCreateTicketMutation__
+ *
+ * To run a mutation, you first call `useCreateTicketMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTicketMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTicketMutation, { data, loading, error }] = useCreateTicketMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *      projectId: // value for 'projectId'
+ *   },
+ * });
+ */
+export function useCreateTicketMutation(baseOptions?: Apollo.MutationHookOptions<CreateTicketMutation, CreateTicketMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTicketMutation, CreateTicketMutationVariables>(CreateTicketDocument, options);
+      }
+export type CreateTicketMutationHookResult = ReturnType<typeof useCreateTicketMutation>;
+export type CreateTicketMutationResult = Apollo.MutationResult<CreateTicketMutation>;
+export type CreateTicketMutationOptions = Apollo.BaseMutationOptions<CreateTicketMutation, CreateTicketMutationVariables>;
 export const DeleteProjectDocument = gql`
     mutation DeleteProject($id: Int!) {
   deleteProject(id: $id)

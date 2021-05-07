@@ -126,6 +126,13 @@ const Project = ({}) => {
               <Heading as="h6" size={"xs"} ml={2} mb={4}>
                 Ticket details
               </Heading>
+
+              <NextLink
+                href={`/projects/${data.project.id}/create-ticket`}
+                replace
+              >
+                <Link>Create Ticket</Link>
+              </NextLink>
               <Box>
                 <Grid templateColumns={"repeat(8,1fr)"}>
                   <GridItem colSpan={2}>Title </GridItem>
