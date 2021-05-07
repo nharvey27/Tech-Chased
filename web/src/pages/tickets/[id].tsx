@@ -1,10 +1,12 @@
 import {
   Box,
+  Flex,
   Grid,
   GridItem,
   Heading,
   IconButton,
   Link,
+  Stack,
 } from "@chakra-ui/react";
 import React from "react";
 import { Layout } from "../../components/Layout";
@@ -37,48 +39,78 @@ const Ticket = ({}) => {
   }
   return (
     <Layout>
-      <Heading>Details for Ticket #{data.ticket.id}</Heading>
-      <NextLink href={`/tickets/edit/${data.ticket.id}`}>
-        <Link>Edit Ticket</Link>
-      </NextLink>
-      <IconButton
-        icon={<DeleteIcon />}
-        aria-label="Delete Ticket"
-        onClick={() => {
-          deleteTicket({
-            variables: { id: data.ticket.id },
-            update: (cache) => {
-              // Post:77
-              cache.evict({ id: "Ticket:" + data.ticket.id });
-            },
-          });
-        }}
-      />
-      <Box>
+      <Stack ml={4} mb={10} mt={-2} bg="yellow.400">
+        <Heading as="h3" ml={4} size="lg" mb={3} mt={3}>
+          Details for Ticket #{data.ticket.id}
+        </Heading>
+        <Flex alignItems="center">
+          <NextLink href={`/tickets/edit/${data.ticket.id}`}>
+            <Link ml={4}>Edit |</Link>
+          </NextLink>
+          <IconButton
+            icon={<DeleteIcon />}
+            aria-label="Delete Ticket"
+            onClick={() => {
+              deleteTicket({
+                variables: { id: data.ticket.id },
+                update: (cache) => {
+                  // Post:77
+                  cache.evict({ id: "Ticket:" + data.ticket.id });
+                },
+              });
+            }}
+          />
+        </Flex>
+      </Stack>
+      <Box ml={4}>
         <Grid templateColumns="repeat(2,1fr)">
           <GridItem>
-            <Heading>Ticket Title</Heading>
-            <Heading>{data.ticket.title}</Heading>
+            <Heading as="h5" size="sm">
+              Ticket Title
+            </Heading>
+            <Heading as="h6" size="xs">
+              {data.ticket.title}
+            </Heading>
           </GridItem>
           <GridItem>
-            <Heading>Ticket Description</Heading>
-            <Heading>{data.ticket.description}</Heading>
+            <Heading as="h5" size="sm">
+              Ticket Description
+            </Heading>
+            <Heading as="h6" size="xs">
+              {data.ticket.description}
+            </Heading>
           </GridItem>
           <GridItem>
-            <Heading>Ticket Status</Heading>
-            <Heading>{data.ticket.status}</Heading>
+            <Heading as="h5" size="sm">
+              Ticket Status
+            </Heading>
+            <Heading as="h6" size="xs">
+              {data.ticket.status}
+            </Heading>
           </GridItem>
           <GridItem>
-            <Heading>Ticket Priority</Heading>
-            <Heading>{data.ticket.priority}</Heading>
+            <Heading as="h5" size="sm">
+              Ticket Priority
+            </Heading>
+            <Heading as="h6" size="xs">
+              {data.ticket.priority}
+            </Heading>
           </GridItem>
           <GridItem>
-            <Heading>Created At</Heading>
-            <Heading>{data.ticket.createdAt}</Heading>
+            <Heading as="h5" size="sm">
+              Created At
+            </Heading>
+            <Heading as="h6" size="xs">
+              {data.ticket.createdAt}
+            </Heading>
           </GridItem>
           <GridItem>
-            <Heading>Last Updated</Heading>
-            <Heading>{data.ticket.updatedAt}</Heading>
+            <Heading as="h5" size="sm">
+              Last Updated
+            </Heading>
+            <Heading as="h6" size="xs">
+              {data.ticket.updatedAt}
+            </Heading>
           </GridItem>
         </Grid>
       </Box>
