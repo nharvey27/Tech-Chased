@@ -78,7 +78,6 @@ let TicketResolver = class TicketResolver extends typeorm_1.BaseEntity {
                 .relation(Ticket_1.Ticket, "users")
                 .of(id)
                 .remove(userId);
-            console.log(ticketResult);
             if (ticketResult.affected === 0) {
                 return false;
             }

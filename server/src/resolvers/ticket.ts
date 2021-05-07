@@ -94,7 +94,6 @@ export class TicketResolver extends BaseEntity {
       .remove(userId);
 
     //check if project was deleted
-    console.log(ticketResult);
     if (ticketResult.affected === 0) {
       return false;
     }
