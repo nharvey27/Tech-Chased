@@ -19,6 +19,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 const Ticket = ({}) => {
   const { data, error, loading } = useGetTicketFromUrl();
   const [deleteTicket] = useDeleteTicketMutation();
+
   if (loading) {
     return (
       <Layout>

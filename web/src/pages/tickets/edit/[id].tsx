@@ -6,27 +6,37 @@ import { InputField } from "../../../components/inputField";
 import { Layout } from "../../../components/Layout";
 import { useUpdateTicketMutation } from "../../../generated/graphql";
 import { useGetIntId } from "../../../utils/useGetIntId";
+import { useGetTicketFromUrl } from "../../../utils/useGetTicketFromUrl";
 import { withApollo } from "../../../utils/withApollo";
 
 interface Props {}
 
 const EditTicket = ({}) => {
   const [updateTicket] = useUpdateTicketMutation();
+  const { data, error, loading } = useGetTicketFromUrl();
   const projectId = useGetIntId();
+
+  if (!data?.ticket) {
+    return (
+      <Layout>
+        <Box>could not find post</Box>
+      </Layout>
+    );
+  }
   return (
     <Layout variant="small">
       <Formik
         initialValues={{
-          title: "",
-          description: "",
-          status: "",
-          priority: "",
+          title: data.ticket.title,
+          description: data.ticket.description,
+          status: data.ticket.status,
+          priority: data.ticket.priority,
         }}
         onSubmit={async (values) => {
           const { errors } = await updateTicket({
             variables: { options: { ...values }, id: projectId },
             update: (cache) => {
-              cache.evict({ fieldName: "projects:{}" });
+              cache.evict({ fieldName: "tickets:{}" });
             },
           });
           if (!errors) {
