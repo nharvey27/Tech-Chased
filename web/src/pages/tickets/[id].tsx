@@ -16,10 +16,12 @@ import { withApollo } from "../../utils/withApollo";
 import NextLink from "next/link";
 import { useDeleteTicketMutation } from "../../generated/graphql";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { useRouter } from "next/router";
 
 const Ticket = ({}) => {
   const { data, error, loading } = useGetTicketFromUrl();
   const [deleteTicket] = useDeleteTicketMutation();
+  const router = useRouter();
 
   if (loading) {
     return (
@@ -57,6 +59,7 @@ const Ticket = ({}) => {
                 variables: { id: data.ticket.id },
                 update: (cache) => {
                   cache.evict({ id: "Ticket:" + data.ticket.id });
+                  router.back();
                 },
               });
             }}

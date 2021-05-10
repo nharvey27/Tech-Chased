@@ -1,11 +1,12 @@
 import { Box, Flex, Button } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import router from "next/router";
+import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../../../components/inputField";
 import { Layout } from "../../../components/Layout";
 import {
   MeDocument,
+  ProjectDocument,
   ProjectsDocument,
   useCreateTicketMutation,
 } from "../../../generated/graphql";
@@ -17,7 +18,7 @@ interface Props {}
 const CreateTicket = ({}) => {
   const [createTicket] = useCreateTicketMutation();
   const projectId = useGetIntId();
-
+  const router = useRouter();
   return (
     <Layout variant="small">
       <Formik
