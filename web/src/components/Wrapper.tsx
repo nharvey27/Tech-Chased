@@ -20,7 +20,7 @@ export const Wrapper: React.FC<WrapperProps> = ({
       bg="white"
       border="1px"
       borderRadius="8px"
-      borderColor="gray.200"
+      borderColor="gray.400"
       boxShadow="lg"
     >
       {children}
