@@ -23,7 +23,7 @@ const CreateProject: React.FC = ({}) => {
           const { errors } = await createProject({
             variables: { options: values },
             update: (cache) => {
-              cache.evict({ fieldName: "projects:{}" });
+              cache.evict({ fieldName: "User:{}" });
             },
           });
           if (!errors) {

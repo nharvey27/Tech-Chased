@@ -16,12 +16,15 @@ import { withApollo } from "../../utils/withApollo";
 import NextLink from "next/link";
 import { useDeleteProjectMutation } from "../../generated/graphql";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { route } from "next/dist/next-server/server/router";
+import { useRouter } from "next/router";
 
 interface ProjcetProps {}
 
 const Project = ({}) => {
   const { data, error, loading } = useGetProjectFromUrl();
   const [deleteProject] = useDeleteProjectMutation();
+  const router = useRouter();
   if (loading) {
     return (
       <Layout>
@@ -58,13 +61,14 @@ const Project = ({}) => {
             </NextLink>
             <IconButton
               icon={<DeleteIcon />}
-              aria-label="Delete Post"
+              aria-label="Delete Project"
               onClick={() => {
                 deleteProject({
                   variables: { id: data.project.id },
                   update: (cache) => {
                     // Post:77
                     cache.evict({ id: "Project:" + data.project.id });
+                    router.push("/");
                   },
                 });
               }}
