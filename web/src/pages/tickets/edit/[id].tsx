@@ -36,7 +36,7 @@ const EditTicket = ({}) => {
           const { errors } = await updateTicket({
             variables: { options: { ...values }, id: projectId },
             update: (cache) => {
-              cache.evict({ fieldName: "tickets:{}" });
+              cache.evict({ id: "Ticket:" + data.ticket.id });
             },
           });
           if (!errors) {

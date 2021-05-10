@@ -1,10 +1,14 @@
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+import { gql } from "@apollo/client";
+import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -15,86 +19,78 @@ export type Scalars = {
 };
 
 export type FieldError = {
-  __typename?: 'FieldError';
-  field: Scalars['String'];
-  message: Scalars['String'];
+  __typename?: "FieldError";
+  field: Scalars["String"];
+  message: Scalars["String"];
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename?: "Mutation";
   register: UserResponse;
   login: UserResponse;
-  logout: Scalars['Boolean'];
+  logout: Scalars["Boolean"];
   createProject: Project;
-  deleteProject: Scalars['Boolean'];
+  deleteProject: Scalars["Boolean"];
   updateProject: Project;
   createTicket?: Maybe<Ticket>;
-  deleteTicket: Scalars['Boolean'];
+  deleteTicket: Scalars["Boolean"];
   updateTicket: Ticket;
 };
-
 
 export type MutationRegisterArgs = {
   options: UsernamePasswordInput;
 };
 
-
 export type MutationLoginArgs = {
-  password: Scalars['String'];
-  username: Scalars['String'];
+  password: Scalars["String"];
+  username: Scalars["String"];
 };
-
 
 export type MutationCreateProjectArgs = {
   options: ProjectInput;
 };
 
-
 export type MutationDeleteProjectArgs = {
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 };
-
 
 export type MutationUpdateProjectArgs = {
   options: ProjectInput;
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 };
 
-
 export type MutationCreateTicketArgs = {
-  projectId: Scalars['Int'];
+  projectId: Scalars["Int"];
   options: TicketInput;
 };
 
-
 export type MutationDeleteTicketArgs = {
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 };
-
 
 export type MutationUpdateTicketArgs = {
   options: TicketInput;
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 };
 
 export type Project = {
-  __typename?: 'Project';
-  id: Scalars['Float'];
-  title: Scalars['String'];
-  description: Scalars['String'];
+  __typename?: "Project";
+  id: Scalars["Float"];
+  title: Scalars["String"];
+  description: Scalars["String"];
   users: Array<User>;
   tickets: Array<Ticket>;
-  createdAt: Scalars['String'];
-  updatedAt: Scalars['String'];
+  createdAt: Scalars["String"];
+  updatedAt: Scalars["String"];
 };
 
 export type ProjectInput = {
-  title: Scalars['String'];
-  description: Scalars['String'];
+  title: Scalars["String"];
+  description: Scalars["String"];
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename?: "Query";
   me?: Maybe<User>;
   projects: Array<Project>;
   project: Project;
@@ -102,321 +98,293 @@ export type Query = {
   tickets: Array<Ticket>;
 };
 
-
 export type QueryProjectArgs = {
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 };
 
-
 export type QueryTicketArgs = {
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 };
 
 export type Ticket = {
-  __typename?: 'Ticket';
-  id: Scalars['Float'];
-  title: Scalars['String'];
-  description: Scalars['String'];
-  status: Scalars['String'];
-  priority: Scalars['String'];
-  projectId: Scalars['Float'];
+  __typename?: "Ticket";
+  id: Scalars["Float"];
+  title: Scalars["String"];
+  description: Scalars["String"];
+  status: Scalars["String"];
+  priority: Scalars["String"];
+  projectId: Scalars["Float"];
   project: Project;
   users: Array<User>;
-  createdAt: Scalars['String'];
-  updatedAt: Scalars['String'];
+  createdAt: Scalars["String"];
+  updatedAt: Scalars["String"];
 };
 
 export type TicketInput = {
-  title: Scalars['String'];
-  description: Scalars['String'];
-  status: Scalars['String'];
-  priority: Scalars['String'];
+  title: Scalars["String"];
+  description: Scalars["String"];
+  status: Scalars["String"];
+  priority: Scalars["String"];
 };
 
 export type User = {
-  __typename?: 'User';
-  id: Scalars['Float'];
-  username: Scalars['String'];
-  email: Scalars['String'];
+  __typename?: "User";
+  id: Scalars["Float"];
+  username: Scalars["String"];
+  email: Scalars["String"];
   projects?: Maybe<Array<Project>>;
   tickets?: Maybe<Array<Ticket>>;
-  createdAt: Scalars['String'];
-  updatedAt: Scalars['String'];
+  createdAt: Scalars["String"];
+  updatedAt: Scalars["String"];
 };
 
 export type UserResponse = {
-  __typename?: 'UserResponse';
+  __typename?: "UserResponse";
   errors?: Maybe<Array<FieldError>>;
   user?: Maybe<User>;
 };
 
 export type UsernamePasswordInput = {
-  email: Scalars['String'];
-  username: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars["String"];
+  username: Scalars["String"];
+  password: Scalars["String"];
 };
 
-export type RegularErrorFragment = (
-  { __typename?: 'FieldError' }
-  & Pick<FieldError, 'field' | 'message'>
-);
+export type RegularErrorFragment = { __typename?: "FieldError" } & Pick<
+  FieldError,
+  "field" | "message"
+>;
 
-export type RegularUserFragment = (
-  { __typename?: 'User' }
-  & Pick<User, 'id' | 'username'>
-  & { tickets?: Maybe<Array<(
-    { __typename?: 'Ticket' }
-    & Pick<Ticket, 'id' | 'title' | 'description' | 'status' | 'priority'>
-  )>>, projects?: Maybe<Array<(
-    { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'title' | 'description'>
-  )>> }
-);
+export type RegularUserFragment = { __typename?: "User" } & Pick<
+  User,
+  "id" | "username"
+> & {
+    tickets?: Maybe<
+      Array<
+        { __typename?: "Ticket" } & Pick<
+          Ticket,
+          "id" | "title" | "description" | "status" | "priority"
+        >
+      >
+    >;
+    projects?: Maybe<
+      Array<
+        { __typename?: "Project" } & Pick<
+          Project,
+          "id" | "title" | "description"
+        >
+      >
+    >;
+  };
 
-export type RegularUserResponseFragment = (
-  { __typename?: 'UserResponse' }
-  & { errors?: Maybe<Array<(
-    { __typename?: 'FieldError' }
-    & RegularErrorFragment
-  )>>, user?: Maybe<(
-    { __typename?: 'User' }
-    & RegularUserFragment
-  )> }
-);
+export type RegularUserResponseFragment = { __typename?: "UserResponse" } & {
+  errors?: Maybe<Array<{ __typename?: "FieldError" } & RegularErrorFragment>>;
+  user?: Maybe<{ __typename?: "User" } & RegularUserFragment>;
+};
 
 export type CreateProjectMutationVariables = Exact<{
   options: ProjectInput;
 }>;
 
-
-export type CreateProjectMutation = (
-  { __typename?: 'Mutation' }
-  & { createProject: (
-    { __typename?: 'Project' }
-    & Pick<Project, 'id'>
-  ) }
-);
+export type CreateProjectMutation = { __typename?: "Mutation" } & {
+  createProject: { __typename?: "Project" } & Pick<Project, "id">;
+};
 
 export type CreateTicketMutationVariables = Exact<{
   options: TicketInput;
-  projectId: Scalars['Int'];
+  projectId: Scalars["Int"];
 }>;
 
-
-export type CreateTicketMutation = (
-  { __typename?: 'Mutation' }
-  & { createTicket?: Maybe<(
-    { __typename?: 'Ticket' }
-    & Pick<Ticket, 'id'>
-  )> }
-);
+export type CreateTicketMutation = { __typename?: "Mutation" } & {
+  createTicket?: Maybe<{ __typename?: "Ticket" } & Pick<Ticket, "id">>;
+};
 
 export type DeleteProjectMutationVariables = Exact<{
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 }>;
 
-
-export type DeleteProjectMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'deleteProject'>
-);
+export type DeleteProjectMutation = { __typename?: "Mutation" } & Pick<
+  Mutation,
+  "deleteProject"
+>;
 
 export type DeleteTicketMutationVariables = Exact<{
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 }>;
 
-
-export type DeleteTicketMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'deleteTicket'>
-);
+export type DeleteTicketMutation = { __typename?: "Mutation" } & Pick<
+  Mutation,
+  "deleteTicket"
+>;
 
 export type LoginMutationVariables = Exact<{
-  username: Scalars['String'];
-  password: Scalars['String'];
+  username: Scalars["String"];
+  password: Scalars["String"];
 }>;
 
+export type LoginMutation = { __typename?: "Mutation" } & {
+  login: { __typename?: "UserResponse" } & RegularUserResponseFragment;
+};
 
-export type LoginMutation = (
-  { __typename?: 'Mutation' }
-  & { login: (
-    { __typename?: 'UserResponse' }
-    & RegularUserResponseFragment
-  ) }
-);
+export type LogoutMutationVariables = Exact<{ [key: string]: never }>;
 
-export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type LogoutMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'logout'>
-);
+export type LogoutMutation = { __typename?: "Mutation" } & Pick<
+  Mutation,
+  "logout"
+>;
 
 export type RegisterMutationVariables = Exact<{
   options: UsernamePasswordInput;
 }>;
 
-
-export type RegisterMutation = (
-  { __typename?: 'Mutation' }
-  & { register: (
-    { __typename?: 'UserResponse' }
-    & RegularUserResponseFragment
-  ) }
-);
+export type RegisterMutation = { __typename?: "Mutation" } & {
+  register: { __typename?: "UserResponse" } & RegularUserResponseFragment;
+};
 
 export type UpdateProjectMutationVariables = Exact<{
   options: ProjectInput;
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 }>;
 
-
-export type UpdateProjectMutation = (
-  { __typename?: 'Mutation' }
-  & { updateProject: (
-    { __typename?: 'Project' }
-    & Pick<Project, 'id'>
-  ) }
-);
+export type UpdateProjectMutation = { __typename?: "Mutation" } & {
+  updateProject: { __typename?: "Project" } & Pick<Project, "id">;
+};
 
 export type UpdateTicketMutationVariables = Exact<{
   options: TicketInput;
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 }>;
 
+export type UpdateTicketMutation = { __typename?: "Mutation" } & {
+  updateTicket: { __typename?: "Ticket" } & Pick<Ticket, "id">;
+};
 
-export type UpdateTicketMutation = (
-  { __typename?: 'Mutation' }
-  & { updateTicket: (
-    { __typename?: 'Ticket' }
-    & Pick<Ticket, 'id'>
-  ) }
-);
+export type MeQueryVariables = Exact<{ [key: string]: never }>;
 
-export type MeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MeQuery = (
-  { __typename?: 'Query' }
-  & { me?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username'>
-    & { tickets?: Maybe<Array<(
-      { __typename?: 'Ticket' }
-      & Pick<Ticket, 'id' | 'title' | 'description' | 'status' | 'priority'>
-    )>>, projects?: Maybe<Array<(
-      { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title' | 'description'>
-    )>> }
-  )> }
-);
+export type MeQuery = { __typename?: "Query" } & {
+  me?: Maybe<
+    { __typename?: "User" } & Pick<User, "id" | "username"> & {
+        tickets?: Maybe<
+          Array<
+            { __typename?: "Ticket" } & Pick<
+              Ticket,
+              "id" | "title" | "description" | "status" | "priority"
+            >
+          >
+        >;
+        projects?: Maybe<
+          Array<
+            { __typename?: "Project" } & Pick<
+              Project,
+              "id" | "title" | "description"
+            >
+          >
+        >;
+      }
+  >;
+};
 
 export type ProjectQueryVariables = Exact<{
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 }>;
 
+export type ProjectQuery = { __typename?: "Query" } & {
+  project: { __typename?: "Project" } & Pick<
+    Project,
+    "title" | "id" | "description"
+  > & {
+      tickets: Array<
+        { __typename?: "Ticket" } & Pick<
+          Ticket,
+          "id" | "priority" | "title" | "status" | "description"
+        > & { users: Array<{ __typename?: "User" } & Pick<User, "username">> }
+      >;
+      users: Array<
+        { __typename?: "User" } & Pick<User, "id" | "username" | "email">
+      >;
+    };
+};
 
-export type ProjectQuery = (
-  { __typename?: 'Query' }
-  & { project: (
-    { __typename?: 'Project' }
-    & Pick<Project, 'title' | 'id' | 'description'>
-    & { tickets: Array<(
-      { __typename?: 'Ticket' }
-      & Pick<Ticket, 'id' | 'priority' | 'title' | 'status' | 'description'>
-      & { users: Array<(
-        { __typename?: 'User' }
-        & Pick<User, 'username'>
-      )> }
-    )>, users: Array<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email'>
-    )> }
-  ) }
-);
+export type ProjectsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type ProjectsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ProjectsQuery = (
-  { __typename?: 'Query' }
-  & { projects: Array<(
-    { __typename?: 'Project' }
-    & Pick<Project, 'description' | 'id'>
-    & { tickets: Array<(
-      { __typename?: 'Ticket' }
-      & Pick<Ticket, 'id' | 'projectId'>
-    )>, users: Array<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username'>
-    )> }
-  )> }
-);
+export type ProjectsQuery = { __typename?: "Query" } & {
+  projects: Array<
+    { __typename?: "Project" } & Pick<Project, "description" | "id"> & {
+        tickets: Array<
+          { __typename?: "Ticket" } & Pick<Ticket, "id" | "projectId">
+        >;
+        users: Array<{ __typename?: "User" } & Pick<User, "id" | "username">>;
+      }
+  >;
+};
 
 export type TicketQueryVariables = Exact<{
-  id: Scalars['Int'];
+  id: Scalars["Int"];
 }>;
 
-
-export type TicketQuery = (
-  { __typename?: 'Query' }
-  & { ticket: (
-    { __typename?: 'Ticket' }
-    & Pick<Ticket, 'id' | 'title' | 'status' | 'description' | 'priority' | 'createdAt' | 'updatedAt'>
-    & { project: (
-      { __typename?: 'Project' }
-      & Pick<Project, 'title'>
-    ), users: Array<(
-      { __typename?: 'User' }
-      & Pick<User, 'username'>
-    )> }
-  ) }
-);
+export type TicketQuery = { __typename?: "Query" } & {
+  ticket: { __typename?: "Ticket" } & Pick<
+    Ticket,
+    | "id"
+    | "title"
+    | "status"
+    | "description"
+    | "priority"
+    | "createdAt"
+    | "updatedAt"
+  > & {
+      project: { __typename?: "Project" } & Pick<Project, "title">;
+      users: Array<{ __typename?: "User" } & Pick<User, "username">>;
+    };
+};
 
 export const RegularErrorFragmentDoc = gql`
-    fragment RegularError on FieldError {
-  field
-  message
-}
-    `;
+  fragment RegularError on FieldError {
+    field
+    message
+  }
+`;
 export const RegularUserFragmentDoc = gql`
-    fragment RegularUser on User {
-  id
-  username
-  tickets {
+  fragment RegularUser on User {
     id
-    title
-    description
-    status
-    priority
+    username
+    tickets {
+      id
+      title
+      description
+      status
+      priority
+    }
+    projects {
+      id
+      title
+      description
+    }
   }
-  projects {
-    id
-    title
-    description
-  }
-}
-    `;
+`;
 export const RegularUserResponseFragmentDoc = gql`
-    fragment RegularUserResponse on UserResponse {
-  errors {
-    ...RegularError
+  fragment RegularUserResponse on UserResponse {
+    errors {
+      ...RegularError
+    }
+    user {
+      ...RegularUser
+    }
   }
-  user {
-    ...RegularUser
-  }
-}
-    ${RegularErrorFragmentDoc}
-${RegularUserFragmentDoc}`;
+  ${RegularErrorFragmentDoc}
+  ${RegularUserFragmentDoc}
+`;
 export const CreateProjectDocument = gql`
-    mutation CreateProject($options: ProjectInput!) {
-  createProject(options: $options) {
-    id
+  mutation CreateProject($options: ProjectInput!) {
+    createProject(options: $options) {
+      id
+    }
   }
-}
-    `;
-export type CreateProjectMutationFn = Apollo.MutationFunction<CreateProjectMutation, CreateProjectMutationVariables>;
+`;
+export type CreateProjectMutationFn = Apollo.MutationFunction<
+  CreateProjectMutation,
+  CreateProjectMutationVariables
+>;
 
 /**
  * __useCreateProjectMutation__
@@ -435,21 +403,38 @@ export type CreateProjectMutationFn = Apollo.MutationFunction<CreateProjectMutat
  *   },
  * });
  */
-export function useCreateProjectMutation(baseOptions?: Apollo.MutationHookOptions<CreateProjectMutation, CreateProjectMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateProjectMutation, CreateProjectMutationVariables>(CreateProjectDocument, options);
-      }
-export type CreateProjectMutationHookResult = ReturnType<typeof useCreateProjectMutation>;
-export type CreateProjectMutationResult = Apollo.MutationResult<CreateProjectMutation>;
-export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<CreateProjectMutation, CreateProjectMutationVariables>;
-export const CreateTicketDocument = gql`
-    mutation CreateTicket($options: TicketInput!, $projectId: Int!) {
-  createTicket(options: $options, projectId: $projectId) {
-    id
-  }
+export function useCreateProjectMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateProjectMutation,
+    CreateProjectMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateProjectMutation,
+    CreateProjectMutationVariables
+  >(CreateProjectDocument, options);
 }
-    `;
-export type CreateTicketMutationFn = Apollo.MutationFunction<CreateTicketMutation, CreateTicketMutationVariables>;
+export type CreateProjectMutationHookResult = ReturnType<
+  typeof useCreateProjectMutation
+>;
+export type CreateProjectMutationResult =
+  Apollo.MutationResult<CreateProjectMutation>;
+export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<
+  CreateProjectMutation,
+  CreateProjectMutationVariables
+>;
+export const CreateTicketDocument = gql`
+  mutation CreateTicket($options: TicketInput!, $projectId: Int!) {
+    createTicket(options: $options, projectId: $projectId) {
+      id
+    }
+  }
+`;
+export type CreateTicketMutationFn = Apollo.MutationFunction<
+  CreateTicketMutation,
+  CreateTicketMutationVariables
+>;
 
 /**
  * __useCreateTicketMutation__
@@ -469,19 +454,36 @@ export type CreateTicketMutationFn = Apollo.MutationFunction<CreateTicketMutatio
  *   },
  * });
  */
-export function useCreateTicketMutation(baseOptions?: Apollo.MutationHookOptions<CreateTicketMutation, CreateTicketMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateTicketMutation, CreateTicketMutationVariables>(CreateTicketDocument, options);
-      }
-export type CreateTicketMutationHookResult = ReturnType<typeof useCreateTicketMutation>;
-export type CreateTicketMutationResult = Apollo.MutationResult<CreateTicketMutation>;
-export type CreateTicketMutationOptions = Apollo.BaseMutationOptions<CreateTicketMutation, CreateTicketMutationVariables>;
-export const DeleteProjectDocument = gql`
-    mutation DeleteProject($id: Int!) {
-  deleteProject(id: $id)
+export function useCreateTicketMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateTicketMutation,
+    CreateTicketMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateTicketMutation,
+    CreateTicketMutationVariables
+  >(CreateTicketDocument, options);
 }
-    `;
-export type DeleteProjectMutationFn = Apollo.MutationFunction<DeleteProjectMutation, DeleteProjectMutationVariables>;
+export type CreateTicketMutationHookResult = ReturnType<
+  typeof useCreateTicketMutation
+>;
+export type CreateTicketMutationResult =
+  Apollo.MutationResult<CreateTicketMutation>;
+export type CreateTicketMutationOptions = Apollo.BaseMutationOptions<
+  CreateTicketMutation,
+  CreateTicketMutationVariables
+>;
+export const DeleteProjectDocument = gql`
+  mutation DeleteProject($id: Int!) {
+    deleteProject(id: $id)
+  }
+`;
+export type DeleteProjectMutationFn = Apollo.MutationFunction<
+  DeleteProjectMutation,
+  DeleteProjectMutationVariables
+>;
 
 /**
  * __useDeleteProjectMutation__
@@ -500,19 +502,36 @@ export type DeleteProjectMutationFn = Apollo.MutationFunction<DeleteProjectMutat
  *   },
  * });
  */
-export function useDeleteProjectMutation(baseOptions?: Apollo.MutationHookOptions<DeleteProjectMutation, DeleteProjectMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteProjectMutation, DeleteProjectMutationVariables>(DeleteProjectDocument, options);
-      }
-export type DeleteProjectMutationHookResult = ReturnType<typeof useDeleteProjectMutation>;
-export type DeleteProjectMutationResult = Apollo.MutationResult<DeleteProjectMutation>;
-export type DeleteProjectMutationOptions = Apollo.BaseMutationOptions<DeleteProjectMutation, DeleteProjectMutationVariables>;
-export const DeleteTicketDocument = gql`
-    mutation DeleteTicket($id: Int!) {
-  deleteTicket(id: $id)
+export function useDeleteProjectMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeleteProjectMutation,
+    DeleteProjectMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    DeleteProjectMutation,
+    DeleteProjectMutationVariables
+  >(DeleteProjectDocument, options);
 }
-    `;
-export type DeleteTicketMutationFn = Apollo.MutationFunction<DeleteTicketMutation, DeleteTicketMutationVariables>;
+export type DeleteProjectMutationHookResult = ReturnType<
+  typeof useDeleteProjectMutation
+>;
+export type DeleteProjectMutationResult =
+  Apollo.MutationResult<DeleteProjectMutation>;
+export type DeleteProjectMutationOptions = Apollo.BaseMutationOptions<
+  DeleteProjectMutation,
+  DeleteProjectMutationVariables
+>;
+export const DeleteTicketDocument = gql`
+  mutation DeleteTicket($id: Int!) {
+    deleteTicket(id: $id)
+  }
+`;
+export type DeleteTicketMutationFn = Apollo.MutationFunction<
+  DeleteTicketMutation,
+  DeleteTicketMutationVariables
+>;
 
 /**
  * __useDeleteTicketMutation__
@@ -531,21 +550,39 @@ export type DeleteTicketMutationFn = Apollo.MutationFunction<DeleteTicketMutatio
  *   },
  * });
  */
-export function useDeleteTicketMutation(baseOptions?: Apollo.MutationHookOptions<DeleteTicketMutation, DeleteTicketMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteTicketMutation, DeleteTicketMutationVariables>(DeleteTicketDocument, options);
-      }
-export type DeleteTicketMutationHookResult = ReturnType<typeof useDeleteTicketMutation>;
-export type DeleteTicketMutationResult = Apollo.MutationResult<DeleteTicketMutation>;
-export type DeleteTicketMutationOptions = Apollo.BaseMutationOptions<DeleteTicketMutation, DeleteTicketMutationVariables>;
-export const LoginDocument = gql`
-    mutation Login($username: String!, $password: String!) {
-  login(username: $username, password: $password) {
-    ...RegularUserResponse
-  }
+export function useDeleteTicketMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeleteTicketMutation,
+    DeleteTicketMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    DeleteTicketMutation,
+    DeleteTicketMutationVariables
+  >(DeleteTicketDocument, options);
 }
-    ${RegularUserResponseFragmentDoc}`;
-export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
+export type DeleteTicketMutationHookResult = ReturnType<
+  typeof useDeleteTicketMutation
+>;
+export type DeleteTicketMutationResult =
+  Apollo.MutationResult<DeleteTicketMutation>;
+export type DeleteTicketMutationOptions = Apollo.BaseMutationOptions<
+  DeleteTicketMutation,
+  DeleteTicketMutationVariables
+>;
+export const LoginDocument = gql`
+  mutation Login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      ...RegularUserResponse
+    }
+  }
+  ${RegularUserResponseFragmentDoc}
+`;
+export type LoginMutationFn = Apollo.MutationFunction<
+  LoginMutation,
+  LoginMutationVariables
+>;
 
 /**
  * __useLoginMutation__
@@ -565,19 +602,33 @@ export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutati
  *   },
  * });
  */
-export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
-      }
+export function useLoginMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    LoginMutation,
+    LoginMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<LoginMutation, LoginMutationVariables>(
+    LoginDocument,
+    options
+  );
+}
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
-export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<
+  LoginMutation,
+  LoginMutationVariables
+>;
 export const LogoutDocument = gql`
-    mutation Logout {
-  logout
-}
-    `;
-export type LogoutMutationFn = Apollo.MutationFunction<LogoutMutation, LogoutMutationVariables>;
+  mutation Logout {
+    logout
+  }
+`;
+export type LogoutMutationFn = Apollo.MutationFunction<
+  LogoutMutation,
+  LogoutMutationVariables
+>;
 
 /**
  * __useLogoutMutation__
@@ -595,21 +646,36 @@ export type LogoutMutationFn = Apollo.MutationFunction<LogoutMutation, LogoutMut
  *   },
  * });
  */
-export function useLogoutMutation(baseOptions?: Apollo.MutationHookOptions<LogoutMutation, LogoutMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument, options);
-      }
+export function useLogoutMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    LogoutMutation,
+    LogoutMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<LogoutMutation, LogoutMutationVariables>(
+    LogoutDocument,
+    options
+  );
+}
 export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
 export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
-export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
+export type LogoutMutationOptions = Apollo.BaseMutationOptions<
+  LogoutMutation,
+  LogoutMutationVariables
+>;
 export const RegisterDocument = gql`
-    mutation Register($options: UsernamePasswordInput!) {
-  register(options: $options) {
-    ...RegularUserResponse
+  mutation Register($options: UsernamePasswordInput!) {
+    register(options: $options) {
+      ...RegularUserResponse
+    }
   }
-}
-    ${RegularUserResponseFragmentDoc}`;
-export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
+  ${RegularUserResponseFragmentDoc}
+`;
+export type RegisterMutationFn = Apollo.MutationFunction<
+  RegisterMutation,
+  RegisterMutationVariables
+>;
 
 /**
  * __useRegisterMutation__
@@ -628,21 +694,35 @@ export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, Regis
  *   },
  * });
  */
-export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
-      }
+export function useRegisterMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    RegisterMutation,
+    RegisterMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(
+    RegisterDocument,
+    options
+  );
+}
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
-export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export type RegisterMutationOptions = Apollo.BaseMutationOptions<
+  RegisterMutation,
+  RegisterMutationVariables
+>;
 export const UpdateProjectDocument = gql`
-    mutation UpdateProject($options: ProjectInput!, $id: Int!) {
-  updateProject(options: $options, id: $id) {
-    id
+  mutation UpdateProject($options: ProjectInput!, $id: Int!) {
+    updateProject(options: $options, id: $id) {
+      id
+    }
   }
-}
-    `;
-export type UpdateProjectMutationFn = Apollo.MutationFunction<UpdateProjectMutation, UpdateProjectMutationVariables>;
+`;
+export type UpdateProjectMutationFn = Apollo.MutationFunction<
+  UpdateProjectMutation,
+  UpdateProjectMutationVariables
+>;
 
 /**
  * __useUpdateProjectMutation__
@@ -662,21 +742,38 @@ export type UpdateProjectMutationFn = Apollo.MutationFunction<UpdateProjectMutat
  *   },
  * });
  */
-export function useUpdateProjectMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProjectMutation, UpdateProjectMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateProjectMutation, UpdateProjectMutationVariables>(UpdateProjectDocument, options);
-      }
-export type UpdateProjectMutationHookResult = ReturnType<typeof useUpdateProjectMutation>;
-export type UpdateProjectMutationResult = Apollo.MutationResult<UpdateProjectMutation>;
-export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<UpdateProjectMutation, UpdateProjectMutationVariables>;
-export const UpdateTicketDocument = gql`
-    mutation UpdateTicket($options: TicketInput!, $id: Int!) {
-  updateTicket(options: $options, id: $id) {
-    id
-  }
+export function useUpdateProjectMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateProjectMutation,
+    UpdateProjectMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateProjectMutation,
+    UpdateProjectMutationVariables
+  >(UpdateProjectDocument, options);
 }
-    `;
-export type UpdateTicketMutationFn = Apollo.MutationFunction<UpdateTicketMutation, UpdateTicketMutationVariables>;
+export type UpdateProjectMutationHookResult = ReturnType<
+  typeof useUpdateProjectMutation
+>;
+export type UpdateProjectMutationResult =
+  Apollo.MutationResult<UpdateProjectMutation>;
+export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<
+  UpdateProjectMutation,
+  UpdateProjectMutationVariables
+>;
+export const UpdateTicketDocument = gql`
+  mutation UpdateTicket($options: TicketInput!, $id: Int!) {
+    updateTicket(options: $options, id: $id) {
+      id
+    }
+  }
+`;
+export type UpdateTicketMutationFn = Apollo.MutationFunction<
+  UpdateTicketMutation,
+  UpdateTicketMutationVariables
+>;
 
 /**
  * __useUpdateTicketMutation__
@@ -696,33 +793,47 @@ export type UpdateTicketMutationFn = Apollo.MutationFunction<UpdateTicketMutatio
  *   },
  * });
  */
-export function useUpdateTicketMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTicketMutation, UpdateTicketMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateTicketMutation, UpdateTicketMutationVariables>(UpdateTicketDocument, options);
-      }
-export type UpdateTicketMutationHookResult = ReturnType<typeof useUpdateTicketMutation>;
-export type UpdateTicketMutationResult = Apollo.MutationResult<UpdateTicketMutation>;
-export type UpdateTicketMutationOptions = Apollo.BaseMutationOptions<UpdateTicketMutation, UpdateTicketMutationVariables>;
+export function useUpdateTicketMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateTicketMutation,
+    UpdateTicketMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateTicketMutation,
+    UpdateTicketMutationVariables
+  >(UpdateTicketDocument, options);
+}
+export type UpdateTicketMutationHookResult = ReturnType<
+  typeof useUpdateTicketMutation
+>;
+export type UpdateTicketMutationResult =
+  Apollo.MutationResult<UpdateTicketMutation>;
+export type UpdateTicketMutationOptions = Apollo.BaseMutationOptions<
+  UpdateTicketMutation,
+  UpdateTicketMutationVariables
+>;
 export const MeDocument = gql`
-    query Me {
-  me {
-    id
-    username
-    tickets {
+  query Me {
+    me {
       id
-      title
-      description
-      status
-      priority
-    }
-    projects {
-      id
-      title
-      description
+      username
+      tickets {
+        id
+        title
+        description
+        status
+        priority
+      }
+      projects {
+        id
+        title
+        description
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useMeQuery__
@@ -739,41 +850,45 @@ export const MeDocument = gql`
  *   },
  * });
  */
-export function useMeQuery(baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, options);
-      }
-export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, options);
-        }
+export function useMeQuery(
+  baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+}
+export function useMeLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+}
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const ProjectDocument = gql`
-    query Project($id: Int!) {
-  project(id: $id) {
-    title
-    id
-    description
-    tickets {
-      id
-      priority
+  query Project($id: Int!) {
+    project(id: $id) {
       title
-      status
+      id
       description
+      tickets {
+        id
+        priority
+        title
+        status
+        description
+        users {
+          username
+        }
+      }
       users {
+        id
         username
+        email
       }
     }
-    users {
-      id
-      username
-      email
-    }
   }
-}
-    `;
+`;
 
 /**
  * __useProjectQuery__
@@ -791,33 +906,46 @@ export const ProjectDocument = gql`
  *   },
  * });
  */
-export function useProjectQuery(baseOptions: Apollo.QueryHookOptions<ProjectQuery, ProjectQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, options);
-      }
-export function useProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectQuery, ProjectQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, options);
-        }
+export function useProjectQuery(
+  baseOptions: Apollo.QueryHookOptions<ProjectQuery, ProjectQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<ProjectQuery, ProjectQueryVariables>(
+    ProjectDocument,
+    options
+  );
+}
+export function useProjectLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ProjectQuery, ProjectQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ProjectQuery, ProjectQueryVariables>(
+    ProjectDocument,
+    options
+  );
+}
 export type ProjectQueryHookResult = ReturnType<typeof useProjectQuery>;
 export type ProjectLazyQueryHookResult = ReturnType<typeof useProjectLazyQuery>;
-export type ProjectQueryResult = Apollo.QueryResult<ProjectQuery, ProjectQueryVariables>;
+export type ProjectQueryResult = Apollo.QueryResult<
+  ProjectQuery,
+  ProjectQueryVariables
+>;
 export const ProjectsDocument = gql`
-    query Projects {
-  projects {
-    description
-    id
-    tickets {
+  query Projects {
+    projects {
+      description
       id
-      projectId
-    }
-    users {
-      id
-      username
+      tickets {
+        id
+        projectId
+      }
+      users {
+        id
+        username
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useProjectsQuery__
@@ -834,36 +962,54 @@ export const ProjectsDocument = gql`
  *   },
  * });
  */
-export function useProjectsQuery(baseOptions?: Apollo.QueryHookOptions<ProjectsQuery, ProjectsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, options);
-      }
-export function useProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectsQuery, ProjectsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, options);
-        }
+export function useProjectsQuery(
+  baseOptions?: Apollo.QueryHookOptions<ProjectsQuery, ProjectsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<ProjectsQuery, ProjectsQueryVariables>(
+    ProjectsDocument,
+    options
+  );
+}
+export function useProjectsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ProjectsQuery,
+    ProjectsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ProjectsQuery, ProjectsQueryVariables>(
+    ProjectsDocument,
+    options
+  );
+}
 export type ProjectsQueryHookResult = ReturnType<typeof useProjectsQuery>;
-export type ProjectsLazyQueryHookResult = ReturnType<typeof useProjectsLazyQuery>;
-export type ProjectsQueryResult = Apollo.QueryResult<ProjectsQuery, ProjectsQueryVariables>;
+export type ProjectsLazyQueryHookResult = ReturnType<
+  typeof useProjectsLazyQuery
+>;
+export type ProjectsQueryResult = Apollo.QueryResult<
+  ProjectsQuery,
+  ProjectsQueryVariables
+>;
 export const TicketDocument = gql`
-    query Ticket($id: Int!) {
-  ticket(id: $id) {
-    id
-    title
-    status
-    description
-    priority
-    createdAt
-    updatedAt
-    project {
+  query Ticket($id: Int!) {
+    ticket(id: $id) {
+      id
       title
-    }
-    users {
-      username
+      status
+      description
+      priority
+      createdAt
+      updatedAt
+      project {
+        title
+      }
+      users {
+        username
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useTicketQuery__
@@ -881,14 +1027,27 @@ export const TicketDocument = gql`
  *   },
  * });
  */
-export function useTicketQuery(baseOptions: Apollo.QueryHookOptions<TicketQuery, TicketQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TicketQuery, TicketQueryVariables>(TicketDocument, options);
-      }
-export function useTicketLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TicketQuery, TicketQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TicketQuery, TicketQueryVariables>(TicketDocument, options);
-        }
+export function useTicketQuery(
+  baseOptions: Apollo.QueryHookOptions<TicketQuery, TicketQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<TicketQuery, TicketQueryVariables>(
+    TicketDocument,
+    options
+  );
+}
+export function useTicketLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<TicketQuery, TicketQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<TicketQuery, TicketQueryVariables>(
+    TicketDocument,
+    options
+  );
+}
 export type TicketQueryHookResult = ReturnType<typeof useTicketQuery>;
 export type TicketLazyQueryHookResult = ReturnType<typeof useTicketLazyQuery>;
-export type TicketQueryResult = Apollo.QueryResult<TicketQuery, TicketQueryVariables>;
+export type TicketQueryResult = Apollo.QueryResult<
+  TicketQuery,
+  TicketQueryVariables
+>;

@@ -4,7 +4,12 @@ import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/inputField";
 import { Layout } from "../components/Layout";
-import { useCreateProjectMutation } from "../generated/graphql";
+import {
+  MeDocument,
+  ProjectsDocument,
+  RegularUserFragmentDoc,
+  useCreateProjectMutation,
+} from "../generated/graphql";
 import { withApollo } from "../utils/withApollo";
 
 interface Props {}
@@ -22,9 +27,7 @@ const CreateProject: React.FC = ({}) => {
         onSubmit={async (values) => {
           const { errors } = await createProject({
             variables: { options: values },
-            update: (cache) => {
-              cache.evict({ fieldName: "User:{}" });
-            },
+            refetchQueries: [{ query: MeDocument }],
           });
           if (!errors) {
             router.push("/");

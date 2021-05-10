@@ -4,17 +4,20 @@ import router from "next/router";
 import React from "react";
 import { InputField } from "../../../components/inputField";
 import { Layout } from "../../../components/Layout";
-import { useCreateTicketMutation } from "../../../generated/graphql";
+import {
+  MeDocument,
+  ProjectsDocument,
+  useCreateTicketMutation,
+} from "../../../generated/graphql";
 import { useGetIntId } from "../../../utils/useGetIntId";
-import { useGetProjectFromUrl } from "../../../utils/useGetProjectFromUrl";
 import { withApollo } from "../../../utils/withApollo";
-import createProject from "../../create-project";
 
 interface Props {}
 
 const CreateTicket = ({}) => {
   const [createTicket] = useCreateTicketMutation();
   const projectId = useGetIntId();
+
   return (
     <Layout variant="small">
       <Formik
@@ -27,9 +30,10 @@ const CreateTicket = ({}) => {
         onSubmit={async (values) => {
           const { errors } = await createTicket({
             variables: { options: { ...values }, projectId },
-            update: (cache) => {
-              cache.evict({ fieldName: "projects:{}" });
-            },
+            refetchQueries: [
+              { query: ProjectsDocument },
+              { query: MeDocument },
+            ],
           });
           if (!errors) {
             router.back();

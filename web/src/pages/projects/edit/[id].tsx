@@ -35,6 +35,9 @@ const EditProject: React.FC = ({}) => {
         onSubmit={async (values) => {
           await updateProject({
             variables: { options: values, id: intId },
+            update: (cache) => {
+              cache.evict({ id: "Project:" + intId });
+            },
           });
           router.back();
         }}
