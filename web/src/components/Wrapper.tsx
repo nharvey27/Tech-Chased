@@ -18,10 +18,10 @@ export const Wrapper: React.FC<WrapperProps> = ({
       maxW={variant === "regular" ? "1000px" : "400px"}
       w="100%"
       bg="white"
-      border="1px"
+      border="2px"
       borderRadius="8px"
       borderColor="gray.400"
-      boxShadow="lg"
+      boxShadow="xl"
     >
       {children}
     </Box>

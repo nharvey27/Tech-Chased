@@ -81,7 +81,7 @@ export const NavBar: React.FC<NavbarProps> = ({}) => {
   return (
     <>
       {sidebar}
-      <Flex boxShadow="sm">
+      <Flex boxShadow="sm" bgColor="#86a5a9">
         <Box mr={2} mt={2} ml={8}>
           <Heading as="h2" size="md">
             <NextLink href="/" as="/">
