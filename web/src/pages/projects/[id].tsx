@@ -8,6 +8,7 @@ import {
   IconButton,
   Link,
   Stack,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
 import { Layout } from "../../components/Layout";
@@ -101,9 +102,9 @@ const Project = ({}) => {
               <Heading as="h5" size={"sm"} mb={2}>
                 Assigned Personnel
               </Heading>
-              <Heading as={"h6"} size={"xs"} ml={2} mb={8}>
+              <Text size={"xs"} ml={2} mb={8}>
                 Current users on this Project
-              </Heading>
+              </Text>
 
               <Grid templateColumns={"repeat(4,1fr)"}>
                 <GridItem mb={4} colSpan={2}>
@@ -135,31 +136,23 @@ const Project = ({}) => {
             <GridItem colSpan={4}>
               <Grid templateColumns="repeat(2, 50%)">
                 <GridItem>
-                  <Heading as="h5" size={"sm"} mb={2}>
+                  <Heading size={"sm"} mb={2}>
                     Tickets for this project
                   </Heading>
                 </GridItem>
 
-                <GridItem>
-                  <Box alignContent="flex-end">
-                    <NextLink
-                      href={`/projects/${data.project.id}/create-ticket`}
-                      replace
-                    >
-                      <Link>Create Ticket</Link>
-                    </NextLink>
-                  </Box>
+                <GridItem mr={4} justifySelf="end">
+                  <NextLink
+                    href={`/projects/${data.project.id}/create-ticket`}
+                    replace
+                  >
+                    <Link colorScheme="facebook">Create Ticket</Link>
+                  </NextLink>
                 </GridItem>
                 <GridItem>
-                  <Heading
-                    alignSelf="flex-end"
-                    as="h6"
-                    size={"xs"}
-                    ml={2}
-                    mb={8}
-                  >
+                  <Text alignSelf="flex-end" size={"xs"} ml={2} mb={8}>
                     Ticket details
-                  </Heading>
+                  </Text>
                 </GridItem>
               </Grid>
 
