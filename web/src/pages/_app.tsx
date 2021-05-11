@@ -1,4 +1,6 @@
 import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
+import Head from "next/head";
+import React from "react";
 
 import theme from "../theme";
 
@@ -10,6 +12,9 @@ function MyApp({ Component, pageProps }: any) {
           useSystemColorMode: true,
         }}
       >
+        <Head>
+          <title>Tech Chased</title>
+        </Head>
         <Component {...pageProps} />
       </ColorModeProvider>
     </ChakraProvider>
