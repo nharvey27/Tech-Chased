@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Divider,
   Flex,
@@ -206,7 +207,21 @@ const Project = ({}) => {
                           <Divider orientation="horizontal" />
                         </GridItem>
                         <GridItem colSpan={2}>
-                          {ticket.priority}
+                          {ticket.priority === "High" ? (
+                            <Badge colorScheme="red" variant="solid">
+                              High
+                            </Badge>
+                          ) : null}
+                          {ticket.priority === "Medium" ? (
+                            <Badge colorScheme="yellow" variant="solid">
+                              Med
+                            </Badge>
+                          ) : null}
+                          {ticket.priority === "Low" ? (
+                            <Badge colorScheme="blue" variant="solid">
+                              Low
+                            </Badge>
+                          ) : null}
                           <Divider orientation="horizontal" />
                         </GridItem>
                         <GridItem colSpan={2}>
