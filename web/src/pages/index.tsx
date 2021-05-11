@@ -13,6 +13,7 @@ import { Layout } from "../components/Layout";
 import { useMeQuery } from "../generated/graphql";
 import NextLink from "next/link";
 import { withApollo } from "../utils/withApollo";
+import Head from "next/head";
 
 const Index: React.FC = ({}) => {
   const { data, error, loading } = useMeQuery();
@@ -28,7 +29,11 @@ const Index: React.FC = ({}) => {
 
   return (
     <Layout>
-      {!data && loading ? (
+      {!data?.me?.projects && !loading ? (
+        <Box p={8}>
+          <Heading>You have no projects at this time.</Heading>
+        </Box>
+      ) : !data && loading ? (
         <div>loading</div>
       ) : (
         <Container>
