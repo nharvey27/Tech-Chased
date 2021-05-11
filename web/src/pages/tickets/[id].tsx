@@ -66,12 +66,8 @@ const Ticket = ({}) => {
           />
         </Flex>
       </Stack>
-      <Box ml={16}>
-        <Grid
-          templateColumns="repeat(2,1fr)"
-          justifyItems="center"
-          templateRows="auto"
-        >
+      <Box ml={20}>
+        <Grid templateColumns="repeat(2,1fr)" templateRows="auto">
           <GridItem>
             <Box mb={4}>
               <Heading mb={2} as="h5" size="sm">
