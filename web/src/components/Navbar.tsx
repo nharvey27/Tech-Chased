@@ -10,6 +10,7 @@ import {
   Heading,
   Link,
   Spacer,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -49,11 +50,13 @@ export const NavBar: React.FC<NavbarProps> = ({}) => {
         <Flex align="center">
           <Box mr={2}>{capitalize(data.me.username)}</Box>
           <NextLink href="/create-project">
-            <Button as={Link}>Create Project</Button>
+            <Text mr={2} as={Link}>
+              Create Project
+            </Text>
           </NextLink>
-          <Button colorScheme="" onClick={onOpen}>
+          <Text mr={2} as={Link} colorScheme="" onClick={onOpen}>
             Profile
-          </Button>
+          </Text>
           <Button
             onClick={async () => {
               await logout();
@@ -85,7 +88,7 @@ export const NavBar: React.FC<NavbarProps> = ({}) => {
         <Box mr={2} mt={2} ml={8}>
           <Heading as="h2" size="md">
             <NextLink href="/" as="/">
-              <Link> Tech Chased</Link>
+              <Link bg="none"> Tech Chased</Link>
             </NextLink>
           </Heading>
         </Box>
