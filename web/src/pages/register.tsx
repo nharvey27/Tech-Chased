@@ -12,7 +12,7 @@ const Register: React.FC<{}> = ({}) => {
   const router = useRouter();
   const [register] = useRegisterMutation();
   return (
-    <Wrapper>
+    <Wrapper variant="small">
       <Formik
         initialValues={{ email: "", username: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
@@ -42,28 +42,30 @@ const Register: React.FC<{}> = ({}) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <InputField
-              name="username"
-              placeholder="username "
-              label="Username "
-            />
-            <InputField name="email" placeholder="email " label="Email " />
-            <Box mt={4}>
+            <Box p={4}>
               <InputField
-                name="password"
-                placeholder="password"
-                label="Password"
-                type="password"
+                name="username"
+                placeholder="username "
+                label="Username "
               />
+              <InputField name="email" placeholder="email " label="Email " />
+              <Box mt={4}>
+                <InputField
+                  name="password"
+                  placeholder="password"
+                  label="Password"
+                  type="password"
+                />
+              </Box>
+              <Button
+                mt={4}
+                type="submit"
+                isLoading={isSubmitting}
+                colorScheme="teal"
+              >
+                Login
+              </Button>
             </Box>
-            <Button
-              mt={4}
-              type="submit"
-              isLoading={isSubmitting}
-              colorScheme="teal"
-            >
-              Login
-            </Button>
           </Form>
         )}
       </Formik>

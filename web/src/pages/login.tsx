@@ -12,7 +12,7 @@ const Login: React.FC = ({}) => {
   const router = useRouter();
   const [login] = useLoginMutation();
   return (
-    <Wrapper>
+    <Wrapper variant="small">
       <Formik
         initialValues={{ username: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
@@ -44,27 +44,29 @@ const Login: React.FC = ({}) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <InputField
-              name="username"
-              placeholder="username"
-              label="Username"
-            />
-            <Box mt={4}>
+            <Box p={4}>
               <InputField
-                name="password"
-                placeholder="password"
-                label="Password"
-                type="password"
+                name="username"
+                placeholder="username"
+                label="Username"
               />
+              <Box mt={4}>
+                <InputField
+                  name="password"
+                  placeholder="password"
+                  label="Password"
+                  type="password"
+                />
+              </Box>
+              <Button
+                mt={4}
+                type="submit"
+                isLoading={isSubmitting}
+                colorScheme="teal"
+              >
+                Login
+              </Button>
             </Box>
-            <Button
-              mt={4}
-              type="submit"
-              isLoading={isSubmitting}
-              colorScheme="teal"
-            >
-              Login
-            </Button>
           </Form>
         )}
       </Formik>
