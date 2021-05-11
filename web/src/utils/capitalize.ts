@@ -1,0 +1,3 @@
+export default function capitalize(word: string) {
+  return word.replace(/^\w/, (c) => c.toUpperCase());
+}

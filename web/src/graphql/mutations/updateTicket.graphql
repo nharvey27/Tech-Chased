@@ -1,0 +1,5 @@
+mutation UpdateTicket($options: TicketInput!, $id: Int!) {
+  updateTicket(options: $options, id: $id) {
+    id
+  }
+}

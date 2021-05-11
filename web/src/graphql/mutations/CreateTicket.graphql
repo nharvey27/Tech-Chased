@@ -1,0 +1,5 @@
+mutation CreateTicket($options: TicketInput!, $projectId: Int!) {
+  createTicket(options: $options, projectId: $projectId) {
+    id
+  }
+}
