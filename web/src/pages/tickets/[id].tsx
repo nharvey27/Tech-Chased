@@ -66,8 +66,12 @@ const Ticket = ({}) => {
           />
         </Flex>
       </Stack>
-      <Box ml={4}>
-        <Grid templateColumns="repeat(2,1fr)">
+      <Box ml={16}>
+        <Grid
+          templateColumns="repeat(2,1fr)"
+          justifyItems="center"
+          templateRows="auto"
+        >
           <GridItem>
             <Box mb={4}>
               <Heading mb={2} as="h5" size="sm">
@@ -93,7 +97,7 @@ const Ticket = ({}) => {
               <Heading mb={2} as="h5" size="sm">
                 Ticket Status
               </Heading>
-              <Text as="h6" ml={4} size="xs">
+              <Text ml={4} size="xs">
                 {data.ticket.status}
               </Text>
             </Box>
@@ -103,7 +107,7 @@ const Ticket = ({}) => {
               <Heading mb={2} as="h5" size="sm">
                 Ticket Priority
               </Heading>
-              <Text as="h6" ml={4} size="xs">
+              <Text ml={4} size="xs">
                 {data.ticket.priority}
               </Text>
             </Box>
@@ -113,7 +117,7 @@ const Ticket = ({}) => {
               <Heading mb={2} as="h5" size="sm">
                 Created At
               </Heading>
-              <Text as="h6" ml={4} size="xs">
+              <Text ml={4} size="xs">
                 {data.ticket.createdAt}
               </Text>
             </Box>
@@ -122,7 +126,7 @@ const Ticket = ({}) => {
             <Heading mb={2} as="h5" size="sm">
               Last Updated
             </Heading>
-            <Text as="h6" ml={4} size="xs">
+            <Text ml={4} size="xs">
               {data.ticket.updatedAt}
             </Text>
           </GridItem>

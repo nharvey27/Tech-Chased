@@ -77,43 +77,52 @@ const Project = ({}) => {
           </Flex>
         </Stack>
         <Box ml={4}>
-          <Grid templateColumns={"repeat(6, 1fr)"} templateRows={"auto"}>
+          <Grid
+            templateColumns={"repeat(6, 1fr)"}
+            templateRows={"auto"}
+            gap={4}
+          >
             <GridItem colSpan={3}>
-              <Heading mb={2} as="h5" size={"xs"}>
+              <Heading mb={2} as="h5" size={"sm"}>
                 Project Name
               </Heading>
-              <Heading mb={16} size={"sm"} as="h6" ml={2}>
+              <Heading mb={12} size={"xs"} as="h6" ml={2}>
                 {data.project.title}
                 <Divider orientation="horizontal" />
               </Heading>
             </GridItem>
 
             <GridItem colSpan={3}>
-              <Heading mb={2} as="h5" size={"xs"}>
+              <Heading mb={2} as="h5" size={"sm"}>
                 Project Description
               </Heading>
-              <Heading mb={16} size={"sm"} as="h6" ml={2}>
+              <Heading mb={12} size={"xs"} as="h6" ml={2}>
                 {data.project.description}
                 <Divider orientation="horizontal" />
               </Heading>
             </GridItem>
 
             <GridItem colSpan={2}>
-              <Heading as="h5" size={"sm"} mb={2}>
-                Assigned Personnel
-              </Heading>
-              <Text size={"xs"} ml={2} mb={8}>
-                Current users on this Project
-              </Text>
+              <Box bg="yellow.400" height="80px" p={2}>
+                <Heading as="h5" size={"sm"} mb={2}>
+                  Assigned Personnel
+                </Heading>
+                <Text size={"xs"} ml={2}>
+                  Current users on this Project
+                </Text>
+              </Box>
 
               <Grid templateColumns={"repeat(4,1fr)"}>
-                <GridItem mb={4} colSpan={2}>
-                  User Name
-                  <Divider orientation="horizontal" />
+                <GridItem mb={4} mt={4} colSpan={2}>
+                  <Heading size="md">User Name </Heading>
+                  <Divider orientation="horizontal" colorScheme="" />
                 </GridItem>
 
-                <GridItem colSpan={2}>
-                  Email <Divider orientation="horizontal" />
+                <GridItem mt={4} colSpan={2}>
+                  <Heading as="h5" size={"md"}>
+                    Email
+                  </Heading>
+                  <Divider orientation="horizontal" />
                 </GridItem>
 
                 {data.project.users.map((user) =>
@@ -134,7 +143,12 @@ const Project = ({}) => {
             </GridItem>
 
             <GridItem colSpan={4}>
-              <Grid templateColumns="repeat(2, 50%)">
+              <Grid
+                templateColumns="repeat(2, 50%)"
+                bg="yellow.400"
+                height="80px"
+                p={2}
+              >
                 <GridItem>
                   <Heading size={"sm"} mb={2}>
                     Tickets for this project
@@ -150,7 +164,7 @@ const Project = ({}) => {
                   </NextLink>
                 </GridItem>
                 <GridItem>
-                  <Text alignSelf="flex-end" size={"xs"} ml={2} mb={8}>
+                  <Text alignSelf="flex-end" size={"xs"} ml={2} mb={4}>
                     Ticket details
                   </Text>
                 </GridItem>
@@ -158,20 +172,20 @@ const Project = ({}) => {
 
               <Box>
                 <Grid templateColumns={"repeat(8,1fr)"}>
-                  <GridItem mb={4} colSpan={2}>
-                    Title
+                  <GridItem mb={4} mt={4} colSpan={2}>
+                    <Heading size="md">Title</Heading>
                     <Divider orientation="horizontal" />
                   </GridItem>
-                  <GridItem colSpan={2}>
-                    Status
+                  <GridItem mt={4} colSpan={2}>
+                    <Heading size="md">Status</Heading>
                     <Divider orientation="horizontal" />
                   </GridItem>
-                  <GridItem colSpan={2}>
-                    Priority
+                  <GridItem mt={4} colSpan={2}>
+                    <Heading size="md">Priority</Heading>
                     <Divider orientation="horizontal" />
                   </GridItem>
-                  <GridItem colSpan={2}>
-                    Submitter
+                  <GridItem mt={4} colSpan={2}>
+                    <Heading size="md">Submitter</Heading>
                     <Divider orientation="horizontal" />
                   </GridItem>
 
