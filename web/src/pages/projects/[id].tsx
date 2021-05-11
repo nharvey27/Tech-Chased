@@ -49,7 +49,7 @@ const Project = ({}) => {
   return (
     <>
       <Layout>
-        <Stack ml={4} mb={10} mt={-2} bg="yellow.400">
+        <Stack ml={4} mb={10} mt={-2} bg="yellow.400" boxShadow="md">
           <Heading as="h3" ml={4} size="lg" mb={3} mt={3}>
             Details for Project #{data.project.id}
           </Heading>
@@ -104,7 +104,7 @@ const Project = ({}) => {
             </GridItem>
 
             <GridItem colSpan={2}>
-              <Box bg="yellow.400" height="80px" p={2}>
+              <Box bg="yellow.400" height="80px" p={2} boxShadow="base">
                 <Heading as="h5" size={"sm"} mb={2}>
                   Assigned Personnel
                 </Heading>
@@ -114,12 +114,12 @@ const Project = ({}) => {
               </Box>
 
               <Grid templateColumns={"repeat(4,1fr)"}>
-                <GridItem mb={4} mt={4} colSpan={2}>
+                <GridItem mb={4} mt={6} colSpan={2}>
                   <Heading size="md">User Name </Heading>
                   <Divider orientation="horizontal" colorScheme="" />
                 </GridItem>
 
-                <GridItem mt={4} colSpan={2}>
+                <GridItem mt={6} colSpan={2}>
                   <Heading as="h5" size={"md"}>
                     Email
                   </Heading>
@@ -149,6 +149,7 @@ const Project = ({}) => {
                 bg="yellow.400"
                 height="80px"
                 p={2}
+                boxShadow="base"
               >
                 <GridItem>
                   <Heading size={"sm"} mb={2}>
@@ -173,19 +174,19 @@ const Project = ({}) => {
 
               <Box>
                 <Grid templateColumns={"repeat(8,1fr)"}>
-                  <GridItem mb={4} mt={4} colSpan={2}>
+                  <GridItem mb={4} mt={6} colSpan={2}>
                     <Heading size="md">Title</Heading>
                     <Divider orientation="horizontal" />
                   </GridItem>
-                  <GridItem mt={4} colSpan={2}>
+                  <GridItem mt={6} colSpan={2}>
                     <Heading size="md">Status</Heading>
                     <Divider orientation="horizontal" />
                   </GridItem>
-                  <GridItem mt={4} colSpan={2}>
+                  <GridItem mt={6} colSpan={2}>
                     <Heading size="md">Priority</Heading>
                     <Divider orientation="horizontal" />
                   </GridItem>
-                  <GridItem mt={4} colSpan={2}>
+                  <GridItem mt={6} colSpan={2}>
                     <Heading size="md">Submitter</Heading>
                     <Divider orientation="horizontal" />
                   </GridItem>

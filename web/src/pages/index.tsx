@@ -39,7 +39,7 @@ const Index: React.FC = ({}) => {
         <div>loading</div>
       ) : (
         <Container>
-          <Stack ml={4} mb={10} mt={-2} bg="yellow.400">
+          <Stack ml={4} mb={10} mt={-2} bg="yellow.400" boxShadow="base">
             <Heading as="h3" ml={2} size="lg" mb={3} mt={3}>
               Your Projects
             </Heading>
