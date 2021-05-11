@@ -69,7 +69,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         app,
         cors: false,
     });
-    app.listen(4000, () => {
+    app.listen(process.env.PORT || 4000, () => {
         console.log("server started on  localhost:4000");
     });
 });
