@@ -90,9 +90,8 @@ let ProjectResolver = class ProjectResolver {
             return true;
         });
     }
-    updateProject(id, options, { req }) {
+    updateProject(id, options, {}) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userId = req.session.userId;
             const result = yield typeorm_1.createQueryBuilder()
                 .update(Project_1.Project)
                 .set(Object.assign({}, options))

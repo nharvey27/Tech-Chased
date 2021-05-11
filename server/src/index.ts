@@ -4,7 +4,7 @@ import express from "express";
 import session from "express-session";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
-import { COOKIE__NAME } from "./constants";
+import { COOKIE__NAME, __prod__ } from "./constants";
 import { User } from "./entities/User";
 import { UserResolver } from "./resolvers/user";
 import connectRedis from "connect-redis";
@@ -13,7 +13,7 @@ import { Project } from "./entities/Project";
 import { Ticket } from "./entities/Ticket";
 import { ProjectResolver } from "./resolvers/project";
 import { TicketResolver } from "./resolvers/ticket";
-
+import "dotenv-safe/config";
 declare module "express-session" {
   interface Session {
     userId: number;
@@ -22,13 +22,13 @@ declare module "express-session" {
 
 const main = async () => {
   const RedisStore = connectRedis(session);
-  const redis = new Redis();
+  const redis = new Redis(process.env.REDIS_URL);
 
   //database connection
   await createConnection({
     type: "postgres",
-    database: "techchased",
     logging: true,
+    url: process.env.DATABASE_URL,
     synchronize: true,
     entities: [User, Project, Ticket],
   });
@@ -36,10 +36,12 @@ const main = async () => {
   //create express session
   const app = express();
 
+  app.set("proxy", 1);
+
   //cors
   app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: process.env.CORS_ORIGIN,
       credentials: true,
     })
   );
@@ -52,6 +54,7 @@ const main = async () => {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
         httpOnly: true,
         sameSite: "lax",
+        domain: __prod__ ? ".codeponder.com" : undefined,
       },
       saveUninitialized: false,
       secret: "secret",
@@ -78,7 +81,7 @@ const main = async () => {
     cors: false,
   });
 
-  app.listen(process.env.PORT || 4000, () => {
+  app.listen(parseInt(process.env.PORT), () => {
     console.log("server started on  localhost:4000");
   });
 };
