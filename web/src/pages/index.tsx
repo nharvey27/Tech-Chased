@@ -31,7 +31,9 @@ const Index: React.FC = ({}) => {
     <Layout>
       {!data?.me?.projects && !loading ? (
         <Box p={8}>
-          <Heading>You have no projects at this time.</Heading>
+          <Heading as="h2" size="lg">
+            You have no projects at this time.
+          </Heading>
         </Box>
       ) : !data && loading ? (
         <div>loading</div>
