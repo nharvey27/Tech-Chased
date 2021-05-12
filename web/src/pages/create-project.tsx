@@ -4,15 +4,8 @@ import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/inputField";
 import { Layout } from "../components/Layout";
-import {
-  MeDocument,
-  ProjectsDocument,
-  RegularUserFragmentDoc,
-  useCreateProjectMutation,
-} from "../generated/graphql";
+import { MeDocument, useCreateProjectMutation } from "../generated/graphql";
 import { withApollo } from "../utils/withApollo";
-
-interface Props {}
 
 const CreateProject: React.FC = ({}) => {
   const router = useRouter();

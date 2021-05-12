@@ -9,11 +9,9 @@ import { useGetIntId } from "../../../utils/useGetIntId";
 import { useGetTicketFromUrl } from "../../../utils/useGetTicketFromUrl";
 import { withApollo } from "../../../utils/withApollo";
 
-interface Props {}
-
 const EditTicket = ({}) => {
   const [updateTicket] = useUpdateTicketMutation();
-  const { data, error, loading } = useGetTicketFromUrl();
+  const { data } = useGetTicketFromUrl();
   const projectId = useGetIntId();
 
   if (!data?.ticket) {

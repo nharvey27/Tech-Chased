@@ -13,7 +13,6 @@ import { Layout } from "../components/Layout";
 import { useMeQuery } from "../generated/graphql";
 import NextLink from "next/link";
 import { withApollo } from "../utils/withApollo";
-import Head from "next/head";
 
 const Index: React.FC = ({}) => {
   const { data, error, loading } = useMeQuery();

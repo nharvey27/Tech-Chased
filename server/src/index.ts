@@ -36,7 +36,7 @@ const main = async () => {
   //create express session
   const app = express();
 
-  app.set("proxy", 1);
+  app.set("trust proxy", 1);
 
   //cors
   app.use(

@@ -39,7 +39,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         entities: [User_1.User, Project_1.Project, Ticket_1.Ticket],
     });
     const app = express_1.default();
-    app.set("proxy", 1);
+    app.set("trust proxy", 1);
     app.use(cors_1.default({
         origin: process.env.CORS_ORIGIN,
         credentials: true,
