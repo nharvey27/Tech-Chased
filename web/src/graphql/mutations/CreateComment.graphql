@@ -1,5 +1,9 @@
-mutation CreateComment($options: TicketInput!, $ticketId: Int!, $userId: Int!) {
-  createComment(options: $options, ticketId: $ticketId, userId: $userId) {
+mutation CreateComment(
+  $options: CommentInput!
+  $ticketId: Int!
+  $userId: Int!
+) {
+  createComment(options: $options, ticketId: $ticketId) {
     text
     user {
       username
