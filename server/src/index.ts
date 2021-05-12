@@ -11,9 +11,12 @@ import connectRedis from "connect-redis";
 import Redis from "ioredis";
 import { Project } from "./entities/Project";
 import { Ticket } from "./entities/Ticket";
+import { Comment } from "./entities/Comment";
+
 import { ProjectResolver } from "./resolvers/project";
 import { TicketResolver } from "./resolvers/ticket";
 import "dotenv-safe/config";
+import { CommentResolver } from "./resolvers/comment";
 declare module "express-session" {
   interface Session {
     userId: number;
@@ -30,7 +33,7 @@ const main = async () => {
     logging: true,
     url: process.env.DATABASE_URL,
     synchronize: true,
-    entities: [User, Project, Ticket],
+    entities: [User, Project, Ticket, Comment],
   });
 
   //create express session
@@ -65,7 +68,12 @@ const main = async () => {
   //create Apollo Server instance
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver, ProjectResolver, TicketResolver],
+      resolvers: [
+        UserResolver,
+        ProjectResolver,
+        TicketResolver,
+        CommentResolver,
+      ],
       validate: false,
     }),
     context: ({ req, res }) => ({

@@ -6,11 +6,13 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Project } from "./Project";
 import { Ticket } from "./Ticket";
+import { Comment } from "./Comment";
 
 @ObjectType()
 @Entity()
@@ -40,6 +42,11 @@ export class User extends BaseEntity {
   @ManyToMany(() => Ticket, (ticket) => ticket.users, { eager: true })
   @JoinTable()
   tickets: Ticket[];
+
+  //comments belongs to a single user
+  @Field(() => [Comment])
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 
   @Field(() => String)
   @CreateDateColumn()
