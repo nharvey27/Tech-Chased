@@ -7,7 +7,7 @@ import {
   Resolver,
   Root,
 } from "type-graphql";
-import { Comment } from "src/entities/Comment";
+import { Comment } from "../entities/Comment";
 import { ObjectType } from "type-graphql";
 import { Entity, BaseEntity } from "typeorm";
 import { CommentInput } from "./commentInputs";

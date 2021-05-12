@@ -28,7 +28,14 @@ const typeorm_1 = require("typeorm");
 const ticketInputs_1 = require("./ticketInputs");
 const Project_1 = require("../entities/Project");
 const User_1 = require("../entities/User");
+const Comment_1 = require("../entities/Comment");
 let TicketResolver = class TicketResolver extends typeorm_1.BaseEntity {
+    comments(ticket) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield Comment_1.Comment.find({ where: { ticketId: ticket.id } });
+            return result;
+        });
+    }
     users(ticket) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield typeorm_1.getConnection()
@@ -96,6 +103,13 @@ let TicketResolver = class TicketResolver extends typeorm_1.BaseEntity {
         });
     }
 };
+__decorate([
+    type_graphql_1.FieldResolver(() => Comment_1.Comment),
+    __param(0, type_graphql_1.Root()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Ticket_1.Ticket]),
+    __metadata("design:returntype", Promise)
+], TicketResolver.prototype, "comments", null);
 __decorate([
     type_graphql_1.FieldResolver(() => User_1.User),
     __param(0, type_graphql_1.Root()),
