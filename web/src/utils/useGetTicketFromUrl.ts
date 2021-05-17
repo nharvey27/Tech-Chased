@@ -1,4 +1,4 @@
-import { useProjectQuery, useTicketQuery } from "../generated/graphql";
+import { useTicketQuery } from "../generated/graphql";
 import { useGetIntId } from "./useGetIntId";
 
 export const useGetTicketFromUrl = () => {

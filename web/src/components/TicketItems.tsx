@@ -1,6 +1,6 @@
 import { Box, GridItem, Heading } from "@chakra-ui/react";
 import React from "react";
-import { Ticket, TicketInput } from "../generated/graphql";
+import { TicketInput } from "../generated/graphql";
 import capitalize from "../utils/capitalize";
 
 interface TicketProps {
@@ -8,7 +8,7 @@ interface TicketProps {
   data: TicketInput;
 }
 
-export const TicketItems: React.FC<TicketProps> = ({ field, data }) => {
+export const TicketItems: React.FC<TicketProps> = ({ field }) => {
   return (
     <GridItem>
       <Box mb={4}>

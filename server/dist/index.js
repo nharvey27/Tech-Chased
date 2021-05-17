@@ -25,21 +25,24 @@ const connect_redis_1 = __importDefault(require("connect-redis"));
 const ioredis_1 = __importDefault(require("ioredis"));
 const Project_1 = require("./entities/Project");
 const Ticket_1 = require("./entities/Ticket");
+const Comment_1 = require("./entities/Comment");
 const project_1 = require("./resolvers/project");
 const ticket_1 = require("./resolvers/ticket");
+require("dotenv-safe/config");
+const comment_1 = require("./resolvers/comment");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const RedisStore = connect_redis_1.default(express_session_1.default);
-    const redis = new ioredis_1.default();
+    const redis = new ioredis_1.default(process.env.REDIS_URL);
     yield typeorm_1.createConnection({
         type: "postgres",
-        database: "techchased",
         logging: true,
+        url: process.env.DATABASE_URL,
         synchronize: true,
-        entities: [User_1.User, Project_1.Project, Ticket_1.Ticket],
+        entities: [User_1.User, Project_1.Project, Ticket_1.Ticket, Comment_1.Comment],
     });
     const app = express_1.default();
     app.use(cors_1.default({
-        origin: "http://localhost:3000",
+        origin: process.env.CORS_ORIGIN,
         credentials: true,
     }));
     app.use(express_session_1.default({
@@ -56,7 +59,12 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     }));
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: yield type_graphql_1.buildSchema({
-            resolvers: [user_1.UserResolver, project_1.ProjectResolver, ticket_1.TicketResolver],
+            resolvers: [
+                user_1.UserResolver,
+                project_1.ProjectResolver,
+                ticket_1.TicketResolver,
+                comment_1.CommentResolver,
+            ],
             validate: false,
         }),
         context: ({ req, res }) => ({
@@ -69,7 +77,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         app,
         cors: false,
     });
-    app.listen(process.env.PORT || 4000, () => {
+    app.listen(parseInt(process.env.PORT), () => {
         console.log("server started on  localhost:4000");
     });
 });

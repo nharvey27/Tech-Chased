@@ -9,12 +9,10 @@ import { useGetIntId } from "../../../utils/useGetIntId";
 import { useGetProjectFromUrl } from "../../../utils/useGetProjectFromUrl";
 import { withApollo } from "../../../utils/withApollo";
 
-interface Props {}
-
 const EditProject: React.FC = ({}) => {
   const router = useRouter();
   const [updateProject] = useUpdateProjectMutation();
-  const { data, error, loading } = useGetProjectFromUrl();
+  const { data } = useGetProjectFromUrl();
   const intId = useGetIntId();
 
   if (!data?.project) {

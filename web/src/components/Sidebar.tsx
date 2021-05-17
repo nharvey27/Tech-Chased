@@ -1,20 +1,13 @@
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
   Drawer,
   DrawerBody,
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
   Heading,
-  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import { MeQuery, RegularUserFragment } from "../generated/graphql";
+import { RegularUserFragment } from "../generated/graphql";
 import capitalize from "../utils/capitalize";
 
 interface SidebarProps {
@@ -24,12 +17,7 @@ interface SidebarProps {
   onOpen: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({
-  me,
-  isOpen,
-  onClose,
-  onOpen,
-}) => {
+export const Sidebar: React.FC<SidebarProps> = ({ me, isOpen, onClose }) => {
   return (
     <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />

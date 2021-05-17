@@ -6,14 +6,11 @@ import { InputField } from "../../../components/inputField";
 import { Layout } from "../../../components/Layout";
 import {
   MeDocument,
-  ProjectDocument,
   ProjectsDocument,
   useCreateTicketMutation,
 } from "../../../generated/graphql";
 import { useGetIntId } from "../../../utils/useGetIntId";
 import { withApollo } from "../../../utils/withApollo";
-
-interface Props {}
 
 const CreateTicket = ({}) => {
   const [createTicket] = useCreateTicketMutation();

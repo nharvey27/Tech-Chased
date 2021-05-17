@@ -107,10 +107,8 @@ export class ProjectResolver {
   async updateProject(
     @Arg("id", () => Int) id: number,
     @Arg("options") options: ProjectInput,
-    @Ctx() { req }: MyContext
+    @Ctx() {}: MyContext
   ): Promise<Project | null> {
-    const userId = req.session.userId;
-
     const result = await createQueryBuilder()
       .update(Project)
       .set({ ...options })

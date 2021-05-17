@@ -15,11 +15,17 @@ import { BaseEntity, Entity, getConnection, createQueryBuilder } from "typeorm";
 import { TicketInput } from "./ticketInputs";
 import { Project } from "../entities/Project";
 import { User } from "../entities/User";
+import { Comment } from "../entities/Comment";
 
 @ObjectType()
 @Entity()
 @Resolver(Ticket)
 export class TicketResolver extends BaseEntity {
+  @FieldResolver(() => Comment)
+  async comments(@Root() ticket: Ticket) {
+    let result = await Comment.find({ where: { ticketId: ticket.id } });
+    return result;
+  }
   @FieldResolver(() => User)
   async users(@Root() ticket: Ticket) {
     const result = await getConnection()

@@ -18,10 +18,7 @@ import { withApollo } from "../../utils/withApollo";
 import NextLink from "next/link";
 import { useDeleteProjectMutation } from "../../generated/graphql";
 import { DeleteIcon } from "@chakra-ui/icons";
-import { route } from "next/dist/next-server/server/router";
 import { useRouter } from "next/router";
-
-interface ProjcetProps {}
 
 const Project = ({}) => {
   const { data, error, loading } = useGetProjectFromUrl();

@@ -4,16 +4,19 @@ import express from "express";
 import session from "express-session";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
-import { COOKIE__NAME } from "./constants";
+import { COOKIE__NAME, __prod__ } from "./constants";
 import { User } from "./entities/User";
 import { UserResolver } from "./resolvers/user";
 import connectRedis from "connect-redis";
 import Redis from "ioredis";
 import { Project } from "./entities/Project";
 import { Ticket } from "./entities/Ticket";
+import { Comment } from "./entities/Comment";
+
 import { ProjectResolver } from "./resolvers/project";
 import { TicketResolver } from "./resolvers/ticket";
-
+import "dotenv-safe/config";
+import { CommentResolver } from "./resolvers/comment";
 declare module "express-session" {
   interface Session {
     userId: number;
@@ -22,24 +25,26 @@ declare module "express-session" {
 
 const main = async () => {
   const RedisStore = connectRedis(session);
-  const redis = new Redis();
+  const redis = new Redis(process.env.REDIS_URL);
 
   //database connection
   await createConnection({
     type: "postgres",
-    database: "techchased",
     logging: true,
+    url: process.env.DATABASE_URL,
     synchronize: true,
-    entities: [User, Project, Ticket],
+    entities: [User, Project, Ticket, Comment],
   });
 
   //create express session
   const app = express();
 
+  // app.set("trust proxy", 1);
+
   //cors
   app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: process.env.CORS_ORIGIN,
       credentials: true,
     })
   );
@@ -52,6 +57,7 @@ const main = async () => {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
         httpOnly: true,
         sameSite: "lax",
+        // domain: __prod__ ? "techchased.com" : undefined,
       },
       saveUninitialized: false,
       secret: "secret",
@@ -62,7 +68,12 @@ const main = async () => {
   //create Apollo Server instance
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver, ProjectResolver, TicketResolver],
+      resolvers: [
+        UserResolver,
+        ProjectResolver,
+        TicketResolver,
+        CommentResolver,
+      ],
       validate: false,
     }),
     context: ({ req, res }) => ({
@@ -78,7 +89,7 @@ const main = async () => {
     cors: false,
   });
 
-  app.listen(process.env.PORT || 4000, () => {
+  app.listen(parseInt(process.env.PORT), () => {
     console.log("server started on  localhost:4000");
   });
 };
