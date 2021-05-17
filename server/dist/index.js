@@ -41,7 +41,6 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         entities: [User_1.User, Project_1.Project, Ticket_1.Ticket, Comment_1.Comment],
     });
     const app = express_1.default();
-    app.set("trust proxy", 1);
     app.use(cors_1.default({
         origin: process.env.CORS_ORIGIN,
         credentials: true,
@@ -53,7 +52,6 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
             httpOnly: true,
             sameSite: "lax",
-            domain: constants_1.__prod__ ? ".codeponder.com" : undefined,
         },
         saveUninitialized: false,
         secret: "secret",

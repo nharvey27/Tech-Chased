@@ -13,5 +13,11 @@ query Ticket($id: Int!) {
     users {
       username
     }
+    comments {
+      text
+      user {
+        username
+      }
+    }
   }
 }

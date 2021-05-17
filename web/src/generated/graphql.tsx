@@ -212,7 +212,6 @@ export type RegularUserResponseFragment = (
 export type CreateCommentMutationVariables = Exact<{
   options: CommentInput;
   ticketId: Scalars['Int'];
-  userId: Scalars['Int'];
 }>;
 
 
@@ -414,6 +413,13 @@ export type TicketQuery = (
     ), users: Array<(
       { __typename?: 'User' }
       & Pick<User, 'username'>
+    )>, comments: Array<(
+      { __typename?: 'Comment' }
+      & Pick<Comment, 'text'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'username'>
+      ) }
     )> }
   ) }
 );
@@ -454,7 +460,7 @@ export const RegularUserResponseFragmentDoc = gql`
     ${RegularErrorFragmentDoc}
 ${RegularUserFragmentDoc}`;
 export const CreateCommentDocument = gql`
-    mutation CreateComment($options: CommentInput!, $ticketId: Int!, $userId: Int!) {
+    mutation CreateComment($options: CommentInput!, $ticketId: Int!) {
   createComment(options: $options, ticketId: $ticketId) {
     text
     user {
@@ -480,7 +486,6 @@ export type CreateCommentMutationFn = Apollo.MutationFunction<CreateCommentMutat
  *   variables: {
  *      options: // value for 'options'
  *      ticketId: // value for 'ticketId'
- *      userId: // value for 'userId'
  *   },
  * });
  */
@@ -942,6 +947,12 @@ export const TicketDocument = gql`
     }
     users {
       username
+    }
+    comments {
+      text
+      user {
+        username
+      }
     }
   }
 }

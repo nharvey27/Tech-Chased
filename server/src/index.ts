@@ -39,7 +39,7 @@ const main = async () => {
   //create express session
   const app = express();
 
-  app.set("trust proxy", 1);
+  // app.set("trust proxy", 1);
 
   //cors
   app.use(
@@ -57,7 +57,7 @@ const main = async () => {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
         httpOnly: true,
         sameSite: "lax",
-        domain: __prod__ ? ".codeponder.com" : undefined,
+        // domain: __prod__ ? "techchased.com" : undefined,
       },
       saveUninitialized: false,
       secret: "secret",
