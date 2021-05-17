@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ticket = void 0;
 const type_graphql_1 = require("type-graphql");
@@ -49,7 +50,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(() => Project_1.Project),
     typeorm_1.ManyToOne(() => Project_1.Project, (project) => project.tickets),
-    __metadata("design:type", Project_1.Project)
+    __metadata("design:type", typeof (_a = typeof Project_1.Project !== "undefined" && Project_1.Project) === "function" ? _a : Object)
 ], Ticket.prototype, "project", void 0);
 __decorate([
     type_graphql_1.Field(() => [User_1.User]),

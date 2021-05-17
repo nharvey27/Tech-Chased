@@ -20,9 +20,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TicketResolver = void 0;
 const Ticket_1 = require("../entities/Ticket");
+const types_1 = require("src/types");
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const ticketInputs_1 = require("./ticketInputs");
@@ -129,7 +131,7 @@ __decorate([
     __param(1, type_graphql_1.Arg("projectId", () => type_graphql_1.Int)),
     __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [ticketInputs_1.TicketInput, Number, Object]),
+    __metadata("design:paramtypes", [typeof (_a = typeof ticketInputs_1.TicketInput !== "undefined" && ticketInputs_1.TicketInput) === "function" ? _a : Object, Number, typeof (_b = typeof types_1.MyContext !== "undefined" && types_1.MyContext) === "function" ? _b : Object]),
     __metadata("design:returntype", Promise)
 ], TicketResolver.prototype, "createTicket", null);
 __decorate([
@@ -137,7 +139,7 @@ __decorate([
     __param(0, type_graphql_1.Arg("id", () => type_graphql_1.Int)),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:paramtypes", [Number, typeof (_c = typeof types_1.MyContext !== "undefined" && types_1.MyContext) === "function" ? _c : Object]),
     __metadata("design:returntype", Promise)
 ], TicketResolver.prototype, "deleteTicket", null);
 __decorate([
@@ -145,7 +147,7 @@ __decorate([
     __param(0, type_graphql_1.Arg("id", () => type_graphql_1.Int)),
     __param(1, type_graphql_1.Arg("options")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, ticketInputs_1.TicketInput]),
+    __metadata("design:paramtypes", [Number, typeof (_d = typeof ticketInputs_1.TicketInput !== "undefined" && ticketInputs_1.TicketInput) === "function" ? _d : Object]),
     __metadata("design:returntype", Promise)
 ], TicketResolver.prototype, "updateTicket", null);
 TicketResolver = __decorate([
