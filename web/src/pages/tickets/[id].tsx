@@ -166,8 +166,9 @@ const Ticket = ({}) => {
                   options: { ...values },
                   ticketId: data.ticket.id,
                 },
-
-                // refetchQueries: [{ query: TicketDocument }],
+                update: (cache) => {
+                  cache.evict({ id: "Ticket:" + data.ticket.id });
+                },
               });
               // todo improve error handling
               if (errors) {
@@ -197,4 +198,4 @@ const Ticket = ({}) => {
   );
 };
 
-export default withApollo({ ssr: true })(Ticket);
+export default withApollo({ ssr: false })(Ticket);
